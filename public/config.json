@@ -1,0 +1,4 @@
+{
+  "REACT_APP_BASE_URL": "http://93.183.195.198:5001/api",
+  "REACT_APP_FRONT_BASE_URL": "http://93.183.195.198:5001"
+}

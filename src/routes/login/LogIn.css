@@ -1,0 +1,20 @@
+.log-in-page {
+    display: flex;
+    background-color: #E5E5E5;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+.log-in-logo {
+    max-width: 15%;
+    margin-bottom: 50px;
+    height: auto;
+}
+.log-in-form-submit {
+    min-width: 360px;
+    height: 50px;
+    background: #00334E;
+    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.043);
+    border-radius: 3px;
+}

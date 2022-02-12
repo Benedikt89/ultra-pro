@@ -1,0 +1,117 @@
+.formControl {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    width: inherit;
+}
+
+.fieldWrapper {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: left;
+    min-width: 8rem;
+    position: relative;
+    zoom: 1;
+    box-sizing: border-box;
+    padding: 0;
+    color: rgba(0, 0, 0, 0.65);
+    font-size: 14px;
+    font-variant: tabular-nums;
+    line-height: 1.5;
+    list-style: none;
+    -webkit-font-feature-settings: 'tnum';
+    font-feature-settings: 'tnum', "tnum";
+    vertical-align: top;
+}
+
+.mainErrorMessage {
+    margin: 5px;
+    padding: 2%;
+
+    color: red;
+    border: 1px solid red;
+    border-radius: 5%;
+}
+
+.errorMessage {
+    position: absolute;
+    width: 120%;
+    min-width: min-content;
+    bottom: 50%;
+    left: 96%;
+    font-weight: 600;
+    color: white;
+    background-color: rgba(255, 0, 0, 0.58);
+
+    composes: mainErrorMessage;
+}
+
+.error textarea,
+.error select,
+.error input {
+    border: solid red 1px;
+}
+
+.success textarea,
+.success input,
+.success select {
+    border: solid #0acc00 1px;
+}
+
+.title {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 24px;
+    color: #919191;
+}
+
+.titleRequired {
+    composes: title;
+}
+
+.titleRequired::before {
+    display: inline-block;
+    margin-right: 4px;
+    color: #f5222d;
+    font-size: 14px;
+    font-family: SimSun, sans-serif;
+    line-height: 1;
+    content: '*';
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    box-sizing: border-box;
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    padding-right: 15px;
+    padding-left: 15px;
+
+    flex-direction: column;
+    align-items: center;
+}
+
+.successBtn {
+    background-color: #83c318;
+    border-color: #30460b;
+    color: #FFFFFF;
+}
+
+.disabled {
+    border-color: #464646;
+    background-color: initial;
+    color: #1f1f20;
+}
+
+.disabled:hover {
+    border-color: #464646;
+    background-color: initial;
+    color: #1f1f20;
+}

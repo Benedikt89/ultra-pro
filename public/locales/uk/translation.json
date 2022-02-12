@@ -1,0 +1,76 @@
+{
+  "navigation": {
+    "forward": "Продовжити",
+    "backward": "Повернутися",
+    "cancel": "Відмінити",
+    "to_main_menu": "На головний екран",
+    "without_number": "Без номера",
+    "send_sms": "Відправити SMS"
+  },
+  "main": {
+    "title": {
+      "level_1": {
+        "0":  "Оберіть потрібну послугу"
+      },
+      "level_2": {
+        "0": "Оберіть потрібну послугу"
+      },
+      "input": "Будь ласка, введіть"
+    },
+    "subtitle": {
+      "phone_input": {
+        "level_0": "Увага",
+        "level_1": ": Якщо Ви забули свій номер телефону, наберіть на телефоні",
+        "level_2": "*161#"
+      }
+    },
+    "tickets": {
+      "driver_license": "Посвідчення водія",
+      "consultation": "Довідка",
+      "dangerous": "Небезпечні вантажі",
+      "transports": "Реєстраційні дії з транспортним засобом",
+      "exam": "Запис на теоретичний іспит",
+      "international_licence": "Міжнародне посвідчення водія",
+      "change_licence": "Обмін посвідчення водія",
+      "certificate_criminal": "Довідка про відсутність судимостей",
+      "certificate_other": "Інші довідки",
+      "business": "Юридична особа",
+      "private": "Фізична особа"
+    }
+  },
+  "keyboard": {
+    "meta": "123",
+    "meta_active": "ABC",
+    "language": "UA",
+    "space": " ",
+    "shift": "SHIFT",
+    "shift_active": "Shift",
+    "forward": "далі",
+    "back": "Повернутися"
+  },
+
+  "error": {
+    "global": "Щось пішло не так, зверніться до оператора!",
+    "phone": "Невірний формат номеру телефону. Будь ласка, перевірте правильність вводу та спробуйте ще раз.",
+    "idleParagraph1": "Через декілька секунд система",
+    "idleParagraph2": "повернеться на початок,",
+    "idleParagraph3": "Натисніть на екран, якщо",
+    "idleParagraph4": "бажаєте продовжити!",
+    "messageServiceUnavailableRegistration": "послуга тимчасово недоступна, будь ласка зверніться до адміністратора!",
+    "messageServiceError": "Щось пішло не так, зверніться до оператора!",
+    "messageBranchParamNotSpecified": "branchId обов'язковий параметр!",
+    "messagePrintServiceProblems": "Проблеми зі службою друку",
+    "queueRequestError": "Помилка запиту до черги",
+    "queueServerError": "Помилка серверу черги",
+    "routingRequestQueueError": "Помилка маршрутизації запиту до черги",
+    "printingTicketRequestError": "Помилка запиту на друк талону",
+    "ticketPrintServerError": "Помилка серверу друку талону",
+    "routingPrintTicketRequestError": "Помилка маршрутизації запиту на друк талону"
+  },
+  "success": {
+    "header": "Ви зареєстровані",
+    "ticket_created": "Будь ласка, заберіть талон та очікуйте на запрошення! Ваш номер талону буде відображено на інформаційному табло.",
+    "sms_created_line_1": "Вам відправлено SMS.",
+    "sms_created_line_2": "Очікуйте виклику."
+  }
+}
