@@ -1,7 +1,6 @@
 import React, {Suspense, useEffect, useState} from 'react';
-import {Provider, useDispatch} from "react-redux";
+import {Provider} from "react-redux";
 import {BrowserRouter as Router,} from "react-router-dom";
-import {useTranslation} from "react-i18next";
 import ErrorBoundary from "antd/lib/alert/ErrorBoundary";
 
 import store from "./store/store";
@@ -11,14 +10,6 @@ import Main from "./routes/Main";
 import './App.css';
 
 const App: React.FC = () => {
-  const [fetching, setFetching] = useState(true);
-
-  return (
-    <Main/>
-  );
-};
-
-const AppWrapper: React.FC = () => {
   const [fetching, setFetching] = useState(true);
 
   useEffect(() => {
@@ -59,7 +50,7 @@ const AppWrapper: React.FC = () => {
         <ErrorBoundary>
           <Router>
             <Provider store={store}>
-              <App/>
+              <Main/>
             </Provider>
           </Router>
         </ErrorBoundary>
@@ -67,4 +58,4 @@ const AppWrapper: React.FC = () => {
   );
 }
 
-export default AppWrapper;
+export default App;

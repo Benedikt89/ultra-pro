@@ -21,10 +21,10 @@ import Header from "../components/Header/Header";
 import LoadingPage from "../components/common/LoadingPage";
 import ErrorBoundary from "antd/lib/alert/ErrorBoundary";
 
-interface I_props {
+interface Props {
 }
 
-interface I_connectedProps {
+interface ConnectedProps {
   modal: I_modal | null
   isAuth: boolean | null
   login: string
@@ -32,23 +32,23 @@ interface I_connectedProps {
   isFetching: boolean
 }
 
-interface I_dispatchedProps {
+interface DispatchedProps {
   setModal: (type: null | ModalTypes, message: string | null, pass?: string) => void
   logOut: () => void
   _setAuthUserData: (payload: I_authUserData) => void
   loginUserThunk: (data: I_loginData, commonAuth?: I_authUserData) => void
 }
 
-interface I_MainProps extends I_props, I_connectedProps, I_dispatchedProps, RouteComponentProps<{}> {
+interface MainProps extends Props, ConnectedProps, DispatchedProps, RouteComponentProps<{}> {
 }
 
-interface I_MainState {
+interface MainState {
   requested: boolean
   prevUrl: string
 }
 
-class Main extends Component<I_MainProps, I_MainState> {
-  constructor(props: I_MainProps) {
+class Main extends Component<MainProps, MainState> {
+  constructor(props: MainProps) {
     super(props);
     this.state = {
       requested: false,
@@ -77,7 +77,7 @@ class Main extends Component<I_MainProps, I_MainState> {
     this.setState({requested: true})
   }
 
-  componentDidUpdate(prevProps: Readonly<I_MainProps>, prevState: Readonly<{}>, snapshot?: any): void {
+  componentDidUpdate(prevProps: Readonly<MainProps>, prevState: Readonly<{}>, snapshot?: any): void {
     if (this.props.isAuth !== prevProps.isAuth) {
       let url = !this.props.isAuth ? '/login' : this.state.prevUrl ? this.state.prevUrl : '/branches';
       console.log('redirect ===> ' + url);
@@ -147,7 +147,7 @@ class Main extends Component<I_MainProps, I_MainState> {
   }
 }
 
-const mapStateToProps = (state: AppStateType): I_connectedProps => {
+const mapStateToProps = (state: AppStateType): ConnectedProps => {
   return {
     modal: state.app.modal,
     isAuth: selectIsAuth(state),
