@@ -91,7 +91,6 @@ const ProfileDataForm = ({userRole, fields, onSubmit, loading}: OtherProps) => {
             label={field.name}
             validate={validators[field.id]}
             wrapperclassname="profile-form-field"
-            iconRender={() => false}
           />
         ))}
         <Button type="primary" htmlType="submit" loading={loading}>

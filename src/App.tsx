@@ -7,7 +7,8 @@ import store from "./store/store";
 import Keys from './constants/appKeys';
 import Main from "./routes/Main";
 
-import './App.css';
+import "./App.less";
+import 'antd/dist/antd.css';
 
 const App: React.FC = () => {
   const [fetching, setFetching] = useState(true);
@@ -21,22 +22,19 @@ const App: React.FC = () => {
       cache: "no-cache"
     })
       .then((response) => response.json())
-      .then((response: any) => {
-        let res: any = {...response};
+      .then((response: {[key: string]: string}) => {
+        let res = {...response};
         if (typeof res === 'object') {
-
-          Object.keys(res).forEach((key: string) => {
+          (Object.keys(res) as Array<keyof typeof Keys>)
+          .forEach((key) => {
             if (key) {
-              //@ts-ignore
               Keys[key] = res[key];
             }
           })
         }
       })
       .finally(() => {
-        // getting the localized text by url
         // obtained from config.js, since the
-        // locale.ts file is initialized faster
         // than the server will return a response
         setFetching(false);
       })
@@ -50,7 +48,7 @@ const App: React.FC = () => {
         <ErrorBoundary>
           <Router>
             <Provider store={store}>
-              <Main/>
+              <Main />
             </Provider>
           </Router>
         </ErrorBoundary>

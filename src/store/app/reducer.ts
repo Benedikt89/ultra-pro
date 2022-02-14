@@ -1,18 +1,19 @@
 import {
-  I_appActions,
+  AppActions,
   appActionTypes
 } from "./actions";
-import {I_appState, I_modal, ModalTypes} from "../../types/app-types";
+import {AppState, ModalType, ModalTypes} from "../../types/app-types";
 
-const initialState: I_appState = {
+const initialState: AppState = {
   isFetching: {},
   error: {},
   modal: null,
   passwordRegexp: null,
-  companyLogo: null
+  companyLogo: null,
+  theme: "dark",
 };
 
-const getModalByType = (type: ModalTypes, message: string | null, pass?: string): I_modal => {
+const getModalByType = (type: ModalTypes, message: string | null, pass?: string): ModalType => {
     if (type === 'error') {
         return {type: "error", message: message ? message : 'modal_error_default_message', title: 'modal_error_default_title'}
     } else {
@@ -25,7 +26,7 @@ const getModalByType = (type: ModalTypes, message: string | null, pass?: string)
     }
 };
 
-const appReducer = (state: I_appState = initialState, action: I_appActions) => {
+const appReducer = (state: AppState = initialState, action: AppActions) => {
   switch (action.type) {
     //setting fetching and frozen status
     case appActionTypes.SET_IS_FETCHING: {
@@ -65,6 +66,12 @@ const appReducer = (state: I_appState = initialState, action: I_appActions) => {
         ...state,
         passwordRegexp: action.passwordRegexp,
         companyLogo: action.logo
+      }
+    }
+    case appActionTypes.SET_THEME: {
+      return {
+        ...state,
+        theme: action.theme,
       }
     }
     default:

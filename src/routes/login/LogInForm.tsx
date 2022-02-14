@@ -4,7 +4,7 @@ import * as Yup from 'yup';
 import {Button} from "antd";
 import {EyeInvisibleOutlined, EyeTwoTone, LockOutlined, UserOutlined} from '@ant-design/icons';
 
-import {I_loginData} from "../../types/auth-types";
+import {LoginData} from "../../types/auth-types";
 
 import './LogIn.css'
 import {FieldWrapper} from "../../components/forms/FormElements/FormsControls";
@@ -20,7 +20,7 @@ interface OtherProps {
   message?: string;
   error: { message: string } | null
   isFetching: boolean
-  onSubmit: (data: I_loginData) => void
+  onSubmit: (data: LoginData) => void
 }
 
 const InnerForm: React.FC<OtherProps & FormikProps<FormValues>> = ({isFetching, message, error}) => {

@@ -6,10 +6,9 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import i18n from './constants/i18n';
 
-require('./index.less');
-
-ReactDOM.render(<I18nextProvider i18n={i18n}>
-  <App />
+ReactDOM.render(
+  <I18nextProvider i18n={i18n}>
+    <App />
 </I18nextProvider>, document.getElementById('root'));
 
 // If you want to start measuring performance in your app, pass a function

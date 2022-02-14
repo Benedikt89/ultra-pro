@@ -1,6 +1,6 @@
 import * as React from "react";
 import {useEffect, useState, useCallback} from "react";
-import {Redirect} from "react-router";
+import {Navigate} from "react-router";
 import {useSelector} from "react-redux";
 
 import BackGroundImage from "../../assets/images/BackGround.svg";
@@ -37,7 +37,7 @@ const LoadingPage: React.FC = () => {
     };
   }, []);
   return redirect
-    ? <Redirect to={isAuth ? "/branches" : "/login"}/>
+    ? <Navigate to={isAuth ? "/home" : "/login"}/>
     : <div className="main-page-wrapper">
       <img alt="Logo" src={companyLogo ? companyLogo : LogoWhite} className="main-page-logo"/>
       <img alt="BackGround" className="bg-image" src={BackGroundImage}/>

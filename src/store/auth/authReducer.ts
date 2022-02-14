@@ -1,7 +1,7 @@
-import {I_authActions, LOGOUT_USER_SUCCESS, SET_USER_DATA} from "./actions";
-import {I_authState} from "../../types/auth-types";
+import {AuthActions, LOGOUT_USER_SUCCESS, SET_USER_DATA} from "./actions";
+import {AuthState} from "../../types/auth-types";
 
-let initialState: I_authState = {
+let initialState: AuthState = {
     userData: {
         Authorization: '',
         Expiration: '',
@@ -13,7 +13,7 @@ let initialState: I_authState = {
     isAuth: false,
 };
 
-const authReducer = (state: I_authState = initialState, action: I_authActions) => {
+const authReducer = (state: AuthState = initialState, action: AuthActions) => {
     switch (action.type) {
         case SET_USER_DATA: {
             return {

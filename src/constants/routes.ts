@@ -1,7 +1,6 @@
 import {RolesType} from "../types/auth-types";
 import {hasOwnProperty} from "../types/typeHelpers";
 
-
 export interface RouteType {
   path: string,
   free: boolean,
@@ -25,43 +24,13 @@ export const routes:Routes = {
     free: false,
     permits: ["ROLE_SUPER_ADMIN", "ROLE_ADMIN", "ROLE_OPERATOR", "ROLE_INSPECTOR"],
   },
-  "branches": {
-    path: "/branches",
+  "home": {
+    path: "/home",
     free: false,
     permits: ["ROLE_SUPER_ADMIN", "ROLE_ADMIN"],
   },
   "users": {
     path: "/users",
-    free: false,
-    permits: ["ROLE_SUPER_ADMIN", "ROLE_ADMIN"],
-  },
-  "services": {
-    path: "/services",
-    free: false,
-    permits: ["ROLE_SUPER_ADMIN", "ROLE_ADMIN"],
-  },
-  "calls": {
-    path: "/calls",
-    free: false,
-    permits: ["ROLE_SUPER_ADMIN", "ROLE_ADMIN"],
-  },
-  "counters": {
-    path: "/counters",
-    free: false,
-    permits: ["ROLE_SUPER_ADMIN", "ROLE_ADMIN"],
-  },
-  "sound": {
-    path: "/sound",
-    free: false,
-    permits: ["ROLE_SUPER_ADMIN", "ROLE_ADMIN"],
-  },
-  "quality": {
-    path: "/quality",
-    free: false,
-    permits: ["ROLE_SUPER_ADMIN", "ROLE_ADMIN"],
-  },
-  "pre": {
-    path: "/pre-registration",
     free: false,
     permits: ["ROLE_SUPER_ADMIN", "ROLE_ADMIN"],
   },

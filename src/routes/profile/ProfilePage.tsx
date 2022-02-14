@@ -10,16 +10,16 @@ import {AppStateType} from "../../store/store";
 import {selectIsAuth, selectUserData} from "../../store/auth/selectors";
 import {selectErrorByKey, selectFetchingByKey} from "../../store/app/selectors";
 import {getUserDataThunk, recoverPasswordThunk, updateUserDataThunk} from "../../store/auth/actions";
-import {I_recoverPasswordData} from "../../store/auth/api";
-import {I_authUserData, ProfileFieldType} from "../../types/auth-types";
+import {RecoverPasswordData} from "../../store/auth/api";
+import {AuthUserData, ProfileFieldType} from "../../types/auth-types";
 import {setModal} from "../../store/app/actions";
 import {ModalTypes} from "../../types/app-types";
 
 import "./ProfilePage.css";
 
-interface I_PageProps {
+interface PageProps {
   isAuth: boolean,
-  userData: I_authUserData,
+  userData: AuthUserData,
   userFields: ProfileFieldType[]
   error: { message: string } | null
   errorPass: { message: string } | null
@@ -28,21 +28,21 @@ interface I_PageProps {
   isFetchingUpdate: boolean
 }
 
-interface I_PageDispatchProps {
+interface PageDispatchProps {
   setModal: (type: null | ModalTypes, message: string | null, pass?: string) => void
-  recoverPasswordThunk: (data: I_recoverPasswordData) => void
+  recoverPasswordThunk: (data: RecoverPasswordData) => void
   updateUserDataThunk: (data: ProfileFieldType[]) => void
   getUserDataThunk: () => void
 }
 
-interface I_PageState {
+interface PageState {
   selectedForm: string
   waitForPass: boolean
   waitForSucess: boolean
 }
 
-class ProfilePage extends Component<I_PageProps & I_PageDispatchProps, I_PageState> {
-  constructor(props: I_PageProps & I_PageDispatchProps) {
+class ProfilePage extends Component<PageProps & PageDispatchProps, PageState> {
+  constructor(props: PageProps & PageDispatchProps) {
     super(props);
     this.state = {
       selectedForm: 'user',
@@ -55,7 +55,7 @@ class ProfilePage extends Component<I_PageProps & I_PageDispatchProps, I_PageSta
     this.props.getUserDataThunk();
   }
 
-  componentDidUpdate(prevProps: Readonly<I_PageProps & I_PageDispatchProps>, prevState: Readonly<I_PageState>, snapshot?: any): void {
+  componentDidUpdate(prevProps: Readonly<PageProps & PageDispatchProps>, prevState: Readonly<PageState>, snapshot?: any): void {
     if (!this.props.isFetchingPass && prevProps.isFetchingPass && this.state.waitForPass && !this.props.errorPass) {
       this.setState({waitForPass: false});
       this.props.setModal('success', 'reset_pass_success');
@@ -103,7 +103,7 @@ class ProfilePage extends Component<I_PageProps & I_PageDispatchProps, I_PageSta
               this.setState({waitForSucess: true});
             }} fields={userFields} loading={isFetchingUpdate || isFetching}/>
             : <PasswordForm isFetching={isFetchingPass} waitForPass={this.state.waitForPass && !errorPass}
-                            onSubmit={(data: I_recoverPasswordData) => {
+                            onSubmit={(data: RecoverPasswordData) => {
                               this.setState({waitForPass: true});
                               recoverPasswordThunk(data)
                             }}
@@ -116,7 +116,7 @@ class ProfilePage extends Component<I_PageProps & I_PageDispatchProps, I_PageSta
 }
 
 
-const mapStateToProps = (state: AppStateType): I_PageProps => {
+const mapStateToProps = (state: AppStateType): PageProps => {
   return {
     userData: selectUserData(state),
     userFields: state.auth.userFields,

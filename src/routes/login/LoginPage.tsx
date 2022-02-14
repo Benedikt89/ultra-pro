@@ -7,17 +7,17 @@ import {Card} from "antd";
 import LogoWhite from "../../assets/images/LogoWhite.svg";
 import './LogIn.css'
 import {loginUserThunk} from "../../store/auth/actions";
-import {I_loginData} from "../../types/auth-types";
+import {LoginData} from "../../types/auth-types";
 import {selectErrorByKey, selectFetchingByKey, selectCompanyLogo} from "../../store/app/selectors";
 
-interface I_ComponentProps {
+interface Props {
   error: { message: string } | null
   isFetching: boolean
-  loginUserThunk: (data: I_loginData) => void,
+  loginUserThunk: (data: LoginData) => void,
   companyLogo: string | null
 }
 
-const LoginPage: React.FC<I_ComponentProps> = ({ loginUserThunk, error, isFetching, companyLogo}) => {
+const LoginPage: React.FC<Props> = ({ loginUserThunk, error, isFetching, companyLogo}) => {
   return (
     <div className="log-in-page">
       <img className="log-in-logo" src={companyLogo ? companyLogo : LogoWhite} alt="Q MATE"/>

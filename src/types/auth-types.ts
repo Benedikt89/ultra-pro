@@ -1,18 +1,18 @@
-export interface I_loginData {
+export interface LoginData {
     login: string,
     password: string
 }
 
-export interface I_eventObject {
+export interface EventObject {
     status: boolean,
     message: string | null
 }
 
-export type I_eventType = 'AUTH_FETCHING' | 'AUTH_ERROR' | 'LOGIN_ERROR' | 'REGISTER_ERROR' | 'AUTH_SUCCESS'
+export type EventType = 'AUTH_FETCHING' | 'AUTH_ERROR' | 'LOGIN_ERROR' | 'REGISTER_ERROR' | 'AUTH_SUCCESS'
 export type RolesType = 'ROLE_SUPER_ADMIN' | 'ROLE_ADMIN' | 'ROLE_OPERATOR' | 'ROLE_INSPECTOR'
 
 
-export interface I_authUserData {
+export interface AuthUserData {
     Authorization: string
     Expiration: string
     login: string
@@ -29,15 +29,15 @@ export type ProfileFieldType = {
     value: string
 }
 
-export type I_authState = {
-    [key in I_eventType]?: I_eventObject;
+export type AuthState = {
+    [key in EventType]?: EventObject;
 } & {
-    userData: I_authUserData;
+    userData: AuthUserData;
     userFields: ProfileFieldType[],
     isAuth: boolean;
 };
 
-export interface I_authToFrontUserData extends I_authUserData{
+export interface AuthToFrontUserData extends AuthUserData{
     tokenDeathTime: number | null,
     rememberMe: boolean | null,
 }

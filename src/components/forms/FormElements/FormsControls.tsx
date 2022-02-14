@@ -8,8 +8,17 @@ const {Option} = Select;
 
 const style = require('./FormControl.module.css');
 
-export const FieldWrapper: React.FC<any> = (props: any) => {
-  const [field, {touched, error}] = useField(props);
+interface Props {
+  type?: string;
+  name?: string;
+  label?: string;
+  validate: (value: string) => string | undefined;
+  wrapperclassname?: string;
+  options?: {value: string; disabled?: boolean; title?: string;}[]
+}
+
+export const FieldWrapper: React.FC<any> = ({validate, ...props}: Props) => {
+  const [field, {touched, error}] = useField(props.name ?? "");
 
   let cx = classNames.bind(style);
   let classForField = cx(style.fieldWrapper, {
@@ -29,11 +38,11 @@ export const FieldWrapper: React.FC<any> = (props: any) => {
             ? <Input.Password {...field} {...props}/>
             : props.type === 'select'
               ? <Select {...field} {...props} style={{width: 360}}>
-                {props.options.map((opt: any) => (
-                  <Option value={opt.value} disabled={opt.disabled}>{opt.title}</Option>
+                {props?.options?.map((opt: any) => (
+                  <Option value={opt.value} key={opt.value} disabled={opt.disabled}>{opt.title ?? opt.value}</Option>
                 ))}
               </Select>
-              : <Input {...field} {...props}/>
+              : <Input {...field} {...props} />
           }
         </div>
       </Tooltip>

@@ -1,16 +1,16 @@
 import axios, {AxiosResponse} from "axios";
-import {I_authToFrontUserData, I_loginData, ProfileFieldType} from "../../types/auth-types";
+import {AuthToFrontUserData, LoginData, ProfileFieldType} from "../../types/auth-types";
 import {apiEndpoints} from "../../constants/api/api";
 import {createAxiosOptions} from "../../utils/axios-options";
 
-export interface I_recoverPasswordData {
+export interface RecoverPasswordData {
   old_pass: string,
   password: string,
   repeat_password: string
 }
 
 export const authAPI = {
-  async loginUser(data: I_loginData): Promise<I_authToFrontUserData | never | any> {
+  async loginUser(data: LoginData): Promise<AuthToFrontUserData | never | any> {
     const res: AxiosResponse = await axios({
       url: apiEndpoints('create').auth.login,
       method: 'POST',
@@ -44,7 +44,7 @@ export const authAPI = {
     }));
     return res.data.res || false;
   },
-  async recoverPassword(auth: string, data: I_recoverPasswordData) {
+  async recoverPassword(auth: string, data: RecoverPasswordData) {
     const res: AxiosResponse = await axios(createAxiosOptions({
       url: apiEndpoints('create').auth.changePassword,
       auth,

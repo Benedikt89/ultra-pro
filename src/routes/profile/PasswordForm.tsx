@@ -6,7 +6,7 @@ import * as Yup from 'yup';
 import {Button} from "antd";
 import {useTranslation} from "react-i18next";
 
-import {I_recoverPasswordData} from "../../store/auth/api";
+import {RecoverPasswordData} from "../../store/auth/api";
 import {selectCompanyPasswordRegExp} from "../../store/app/selectors";
 import {FieldWrapper} from "../../components/forms/FormElements/FormsControls";
 
@@ -22,7 +22,7 @@ interface OtherProps {
   password?: string;
   isFetching: boolean
   waitForPass: boolean
-  onSubmit: (data: I_recoverPasswordData) => void
+  onSubmit: (data: RecoverPasswordData) => void
 }
 
 const InnerForm: React.FC<OtherProps & FormikProps<FormValues>> = ({isFetching, resetForm, waitForPass}) => {
@@ -32,7 +32,7 @@ const InnerForm: React.FC<OtherProps & FormikProps<FormValues>> = ({isFetching, 
     if (waitForPass && !isFetching) {
       resetForm();
     }
-  }, [isFetching]);
+  }, [isFetching, waitForPass]);
 
   return (
     <FormikForm className="profile-form-wrapper">

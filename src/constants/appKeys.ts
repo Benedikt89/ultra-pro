@@ -1,4 +1,4 @@
-type KeysProps = {
+export type KeysProps = {
   REACT_APP_BASE_URL: string
   REACT_APP_FRONT_BASE_URL: string
 }

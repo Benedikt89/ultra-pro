@@ -1,34 +1,35 @@
 import {ThunkDispatch} from "redux-thunk";
 
 import {authAPI} from "./api";
-import {I_authUserData, I_loginData, ProfileFieldType} from "../../types/auth-types";
+import {AuthUserData, LoginData, ProfileFieldType} from "../../types/auth-types";
 import {AppActionsType, GetStateType} from "../store";
 import {fetchHandler} from "../../utils/fetchWrapper";
 
 export const localStorageKey = process.env.REACT_APP_LS_TOKEN || 'REACT_APP_LS_TOKEN';
-export const localStorageRoleKey = process.env.REACT_APP_USER_ROLE || 'qmate-2-0-user-role';
+export const localStorageRoleKey = process.env.REACT_APP_USER_ROLE || 'ultra-pro-user-role';
 
 export const LOGOUT_USER_SUCCESS = 'app/auth/LOGOUT_USER_SUCCESS';
 export const SET_USER_DATA = 'app/auth/SET_USER_DATA';
 
-export type I_authActions = I_userSessionDataAC | I_logoutUserSuccessAC;
+export type AuthActions = UserSessionDataAC | LogoutUserSuccessAC;
 
 //interfaces
-interface I_userSessionDataAC {
+interface UserSessionDataAC {
   type: typeof SET_USER_DATA,
-  payload: I_authUserData
+  payload: AuthUserData
   userFields?: ProfileFieldType[]
 }
 
-interface I_logoutUserSuccessAC {
+interface LogoutUserSuccessAC {
   type: typeof LOGOUT_USER_SUCCESS
 }
 
 
 //ACTIONS CREATORS
-export const _setAuthUserData = (payload: I_authUserData, userFields?: ProfileFieldType[]): I_userSessionDataAC =>
+export const _setAuthUserData = (payload: AuthUserData, userFields?: ProfileFieldType[]): UserSessionDataAC =>
   ({type: SET_USER_DATA, payload, userFields});
-export const logOut = (): I_logoutUserSuccessAC => {
+
+export const logOut = (): LogoutUserSuccessAC => {
   localStorage.removeItem(localStorageKey);
   localStorage.removeItem(localStorageRoleKey);
   return {type: LOGOUT_USER_SUCCESS};
@@ -36,11 +37,11 @@ export const logOut = (): I_logoutUserSuccessAC => {
 
 
 //EXTERNAL ACTIONS
-export const loginUserThunk = (data: I_loginData, commonAuth?: I_authUserData) =>
+export const loginUserThunk = (data: LoginData, commonAuth?: AuthUserData) =>
   fetchHandler(
     'loginUser',
     async (dispatch: ThunkDispatch<{}, {}, AppActionsType>) => {
-      let auth: I_authUserData | null = commonAuth || null;
+      let auth: AuthUserData | null = commonAuth || null;
       if (!commonAuth) {
         auth = await authAPI.loginUser(data);
         localStorage.setItem(localStorageKey, JSON.stringify(auth));
