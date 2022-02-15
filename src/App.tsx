@@ -1,7 +1,6 @@
 import React, {Suspense, useEffect, useState} from 'react';
 import {Provider} from "react-redux";
 import {BrowserRouter as Router,} from "react-router-dom";
-import ErrorBoundary from "antd/lib/alert/ErrorBoundary";
 
 import store from "./store/store";
 import Keys from './constants/appKeys';
@@ -45,13 +44,11 @@ const App: React.FC = () => {
       ? null
       :
       <Suspense fallback="loading">
-        <ErrorBoundary>
-          <Router>
-            <Provider store={store}>
-              <Main />
-            </Provider>
-          </Router>
-        </ErrorBoundary>
+        <Router>
+          <Provider store={store}>
+            <Main />
+          </Provider>
+        </Router>
       </Suspense>
   );
 }

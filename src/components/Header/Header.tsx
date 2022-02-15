@@ -1,59 +1,54 @@
 import * as React from "react";
-import {useCallback, useMemo} from "react";
-import {Avatar, Button, PageHeader, Switch} from "antd";
+import {useCallback} from "react";
+import {Button, PageHeader} from "antd";
 import {Link} from "react-router-dom";
 import {useTranslation} from "react-i18next";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 
-import {AppStateType} from "../../store/store";
-import {selectUserData} from "../../store/auth/selectors";
-import {setTheme} from "../../store/app/actions";
 import {logOut} from "../../store/auth/actions";
+import logo from "../../assets/images/logo.png";
+import headphones from "../../assets/images/icons/headphones.svg";
+import circul from "../../assets/images/icons/circul.svg";
+import info from "../../assets/images/icons/info.svg";
+import exit from "../../assets/images/icons/exit.svg";
 
-import './Header.css';
+import './Header.less';
 
-interface Props {}
+interface Props {
+}
 
 const Header: React.FC<Props> = ({}) => {
   const {t} = useTranslation();
   const dispatch = useDispatch();
-  const { login, theme } = useSelector(
-    (state: AppStateType) => ({
-      login: selectUserData(state).login,
-      theme: state.app.theme
-    }))
-
-  const toggleTheme = (isChecked: boolean) => {
-    dispatch(setTheme(isChecked ? "dark" : "light"));
-  };
-  const toDisplay = useMemo(() => login.length > 5
-    ? [...login.split('')].splice(0, 5).join('')
-    : login, []);
 
   const logOutHandler = useCallback(() => {
     dispatch(logOut())
   }, []);
+
   return (
     <PageHeader
       className="site-page-header-responsive"
+      title={<>
+        <img src={logo} alt="logo" className="header-logo"/>
+        <Button className="header-icon-button" icon={<img src={headphones} alt="logo"/>}/>
+        <Button className="header-icon-button" icon={<img src={circul} alt="logo"/>}/>
+        <Button className="header-icon-button" icon={<img src={info} alt="logo"/>}/>
+      </>}
       extra={[
-        <Switch key="Switch" checked={theme === "dark"} onChange={toggleTheme} />,
-        <Link to='/profile' key="1">
-          <Avatar
-            style={{backgroundColor: "#2F80ED", verticalAlign: 'middle'}}
-            size={40}
-            gap={1}
-          >
-            {toDisplay}
-          </Avatar>
+        <Link to='/home' key="2">
+          <Button type="text">
+            {t('header.orders_constructor')}
+          </Button>
         </Link>,
-        <Button key="2" type="text" style={{color: '#fff'}} onClick={logOutHandler}>
-          {t('logout')}
+        <Button
+          key="3" className="logout-button" onClick={logOutHandler}
+          icon={<img src={exit} alt="logo"/>}
+        >
+          {t('header.logout')}
         </Button>,
       ]}
-      style={{backgroundColor: '#00334E'}}
     />
   )
-}
+};
 
 export default Header;

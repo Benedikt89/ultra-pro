@@ -12,12 +12,15 @@ interface Props {
   type?: string;
   name?: string;
   label?: string;
-  validate: (value: string) => string | undefined;
+  placeholder?: string;
+  validate?: (value: string) => string | undefined;
+  prefix?: React.ReactNode;
+  iconRender?: (visible: boolean) => React.ReactNode;
   wrapperclassname?: string;
   options?: {value: string; disabled?: boolean; title?: string;}[]
 }
 
-export const FieldWrapper: React.FC<any> = ({validate, ...props}: Props) => {
+export const FieldWrapper: React.FC<Props> = ({validate, ...props}: Props) => {
   const [field, {touched, error}] = useField(props.name ?? "");
 
   let cx = classNames.bind(style);

@@ -7,36 +7,45 @@
     "without_number": "Без номера",
     "send_sms": "Відправити SMS"
   },
-  "main": {
-    "title": {
-      "level_1": {
-        "0":  "Оберіть потрібну послугу"
-      },
-      "level_2": {
-        "0": "Оберіть потрібну послугу"
-      },
-      "input": "Будь ласка, введіть"
+  "header": {
+    "logout": "Вихід",
+    "orders_constructor": "Конструктор замовлень"
+  },
+  "orders": {
+    "new_order": "Нове замовлення",
+    "title": "Замовлення",
+    "order_number": {
+      "placeholder": "Введіть номер замовлення"
     },
-    "subtitle": {
-      "phone_input": {
-        "level_0": "Увага",
-        "level_1": ": Якщо Ви забули свій номер телефону, наберіть на телефоні",
-        "level_2": "*161#"
-      }
+    "series": {
+      "title": "Серія",
+      "placeholder": "Виберіть серію"
     },
-    "tickets": {
-      "driver_license": "Посвідчення водія",
-      "consultation": "Довідка",
-      "dangerous": "Небезпечні вантажі",
-      "transports": "Реєстраційні дії з транспортним засобом",
-      "exam": "Запис на теоретичний іспит",
-      "international_licence": "Міжнародне посвідчення водія",
-      "change_licence": "Обмін посвідчення водія",
-      "certificate_criminal": "Довідка про відсутність судимостей",
-      "certificate_other": "Інші довідки",
-      "business": "Юридична особа",
-      "private": "Фізична особа"
+    "date": {
+      "title": "Дата",
+      "placeholder": "Виберіть дату"
+    },
+    "customer": {
+      "title": "Замовник (ПІБ)",
+      "placeholder": "Іванов Іван"
+    },
+    "phone": {
+      "title": "Контактний телефон",
+      "placeholder": "+38 (___) ___-__-__"
+    },
+    "city": {
+      "title": "Місто",
+      "placeholder": "Виберіть місто"
+    },
+    "footer": {
+      "save_order":  "Зберегти замовлення",
+      "save_options":  "Зберегти креслення",
+      "save_spec":  "Зберегти специфікацію",
+      "save_cnc":  "Зберегти CNC",
+      "save_materials": "Зберегти розрахунок матеріалів"
     }
+  },
+  "main": {
   },
   "keyboard": {
     "meta": "123",

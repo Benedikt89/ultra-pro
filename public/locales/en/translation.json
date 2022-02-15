@@ -7,53 +7,46 @@
     "without_number": "Without number",
     "send_sms": "Send SMS"
   },
-  "main": {
-    "title": {
-      "level_1": {
-        "0":  "For registration,",
-        "1": "please сhoose the category"
-      },
-      "level_2": {
-        "0": "Please enter your phone number"
-      },
-      "level_3": {
-        "0": "Please choose the type of your request"
-      },
-      "level_4": {
-        "0":  "Please choose one of the following options: ",
-        "1": "print the ticket with the queue number",
-        "2": "or send SMS"
-      },
-      "phone_input": {
-        "0": "Enter phone number"
-      }
+  "header": {
+    "logout": "Logout",
+    "orders_constructor": "Orders constructor"
+  },
+  "orders": {
+    "new_order": "New order",
+    "title": "Orders",
+    "order_number": {
+      "placeholder": "Enter oder number"
     },
-    "subtitle": {
-      "phone_input": {
-        "level_0": "Pay attention: ",
-        "level_1": " If you forgot your phone number, use your phone to enter",
-        "level_2": " *161#"
-      }
+    "series": {
+      "title": "Series",
+      "placeholder": "Виберіть серію"
     },
-    "tickets": {
-      "Buisness": "Business customer and entrepreneur service",
-      "Private": "Individual customer service",
-      "NewConnect":  "To subscribe",
-      "Consult": "Help&Support",
-      "Migration":  "To switch to the postpaid plans",
-      "ChangeSim": "SIM Card Change",
-      "Phones":  "Fixed line",
-      "BuisnessProducts": "Business products",
-      "OtherServices": "Other services/ Help&Support",
-      "Sales": "Sales&Offers",
-      "HomeServices": "Home Internet/TV",
-      "FIZ-NUM-OtherServices": "Other services/ Help&Support",
-      "Print": "To print the ticket",
-      "SmsWithPhone": "SMS to the number:",
-      "SmsWithoutPhone": "SMS with ticket number",
-      "service_bottom": "Please choose the type of your request",
-      "node_bottom": "Please choose the type of your request"
+    "date": {
+      "title": "Date",
+      "placeholder": "Виберіть дату"
+    },
+    "customer": {
+      "title": "Customer name",
+      "placeholder": "Іванов Іван"
+    },
+    "phone": {
+      "title": "Contact phone",
+      "placeholder": "+38 (___) ___-__-__"
+    },
+    "city": {
+      "title": "City",
+      "placeholder": "Виберіть місто"
+    },
+    "footer": {
+      "save_order":  "Зберегти замовлення",
+      "save_options":  "Зберегти креслення",
+      "save_spec":  "Зберегти специфікацію",
+      "save_cnc":  "Зберегти CNC",
+      "save_materials": "Зберегти розрахунок матеріалів"
     }
+  },
+  "main": {
+
   },
 
   "error": {

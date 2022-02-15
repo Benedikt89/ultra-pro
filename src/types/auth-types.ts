@@ -21,7 +21,7 @@ export interface AuthUserData {
 }
 
 export type ProfileFieldType = {
-    id: number | string
+    id: string
     mandatory: boolean
     name: string
     regexp: null | string

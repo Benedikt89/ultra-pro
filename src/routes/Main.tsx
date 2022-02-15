@@ -17,10 +17,10 @@ import uiVersion from '../GitInfo.json'
 
 import Header from "../components/Header/Header";
 import LoadingPage from "../components/common/LoadingPage";
-import ErrorBoundary from "antd/lib/alert/ErrorBoundary";
 import useEffectOnce from "../utils/hooks/useEffectOnce";
 
 import './Main.less';
+import OrdersPage from "./orders/Orders";
 
 interface Props {}
 
@@ -88,32 +88,30 @@ const Main: React.FC<MainProps> = ({
 
   return (
     <div className={"mainWrapper"}>
-      <ErrorBoundary>
-        <main>
-          {isAuth && <Header />}
-          {isFetching || !state.requested ?
-            <LoadingPage/>
-            :
-            <div className={"contentWrapper"}>
-              <Routes>
-                <Route path="/" element={<LoadingPage/>}/>
-                <Route path="/login" element={<LoginPage/>}/>
+      <main>
+        {isAuth && <Header />}
+        {isFetching || !state.requested ?
+          <LoadingPage/>
+          :
+          <div className={"contentWrapper"}>
+            <Routes>
+              <Route path="/" element={<LoadingPage/>}/>
+              <Route path="/login" element={<LoginPage/>}/>
 
-                <Route path="/profile" element={<ProtectedRoute routeKey='profile' />}>
-                  <Route path="" element={<ProfilePage/>} />
-                </Route>
+              <Route path="/profile" element={<ProtectedRoute routeKey='profile' />}>
+                <Route path="" element={<ProfilePage/>} />
+              </Route>
 
-                <Route path="/home" element={<ProtectedRoute routeKey='home' />}>
-                  <Route path="" element={<div>home</div>} />
-                </Route>
+              <Route path="/home" element={<ProtectedRoute routeKey='home' />}>
+                <Route path="" element={<OrdersPage />} />
+              </Route>
 
-                <Route path="*" element={<div>Error 404</div>}/>
-              </Routes>
-            </div>
-          }
-          <span className="ui-version">v.{uiVersion.gitCommitHash}</span>
-        </main>
-      </ErrorBoundary>
+              <Route path="*" element={<div>Error 404</div>}/>
+            </Routes>
+          </div>
+        }
+        <span className="ui-version">v.{uiVersion.gitCommitHash}</span>
+      </main>
       <Modal
         title={modal && modal.title}
         centered
