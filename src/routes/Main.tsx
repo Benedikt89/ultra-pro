@@ -14,13 +14,13 @@ import {AuthUserData, LoginData} from "../types/auth-types";
 import {ModalType, ModalTypes} from "../types/app-types";
 import {setModal} from "../store/app/actions";
 import uiVersion from '../GitInfo.json'
-
 import Header from "../components/Header/Header";
 import LoadingPage from "../components/common/LoadingPage";
 import useEffectOnce from "../utils/hooks/useEffectOnce";
+import OrdersPage from "./orders/Orders";
+import Modifications from "./modifications/Modifications";
 
 import './Main.less';
-import OrdersPage from "./orders/Orders";
 
 interface Props {}
 
@@ -81,7 +81,7 @@ const Main: React.FC<MainProps> = ({
   })
 
   useEffect(() => {
-    let url = !isAuth ? '/login' : state.prevUrl ? state.prevUrl : '/home';
+    let url = !isAuth ? '/login' : state.prevUrl ? state.prevUrl : '/orders';
     console.log('redirect ===> ' + url);
     navigate(url);
   }, [isAuth])
@@ -102,8 +102,12 @@ const Main: React.FC<MainProps> = ({
                 <Route path="" element={<ProfilePage/>} />
               </Route>
 
-              <Route path="/home" element={<ProtectedRoute routeKey='home' />}>
+              <Route path="/orders" element={<ProtectedRoute routeKey='orders' />}>
                 <Route path="" element={<OrdersPage />} />
+              </Route>
+
+              <Route path="/modifications" element={<ProtectedRoute routeKey='modifications' />}>
+                <Route path="" element={<Modifications />} />
               </Route>
 
               <Route path="*" element={<div>Error 404</div>}/>

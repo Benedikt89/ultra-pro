@@ -1,12 +1,12 @@
 import * as React from "react";
 import {Button} from "antd";
 import {Form, Formik} from "formik";
+import {useTranslation} from "react-i18next";
 
 import {ProfileFieldType} from "../../types/auth-types";
+import {FieldWrapper} from "../../components/forms/FormElements/FormsControls";
 
 import './ProfilePage.css';
-import {useTranslation} from "react-i18next";
-import {FieldWrapper} from "../../components/forms/FormElements/FormsControls";
 
 interface OtherProps {
   fields: ProfileFieldType[];
@@ -65,7 +65,7 @@ const ProfileDataForm = ({userRole, fields, onSubmit, loading}: OtherProps) => {
   return !fields.length ? (
     // <div style={{minWidth: '40rem', minHeight: '10rem', textAlign: 'center'}}>No Data</div>
     <div className="profile-form-field" style={{marginBottom: '10px'}}>
-      <label style={{color: '#919191'}} >{t('label_role')}</label>
+      <label>{t('label_role')}</label>
       <div>
         <span className="ant-input">{t(userRole)}</span>
       </div>
@@ -73,7 +73,7 @@ const ProfileDataForm = ({userRole, fields, onSubmit, loading}: OtherProps) => {
   ) : (
     <>
       <div className="profile-form-field" style={{marginBottom: '10px'}}>
-        <label style={{color: '#919191'}} >{t('label_role')}</label>
+        <label >{t('label_role')}</label>
         <div>
           <span className="ant-input">{t(userRole)}</span>
         </div>

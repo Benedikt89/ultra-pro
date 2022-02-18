@@ -45,10 +45,11 @@
       "save_materials": "Зберегти розрахунок матеріалів"
     }
   },
-  "main": {
-
+  "mods": {
+    "mods_title": "Журнал модифікацій",
+    "image_title": "Остаточний вид деталі зі всіма доданими модифікаціями і бічними видами",
+    "add_mod": "Add modification"
   },
-
   "error": {
     "global": "Something went wrong. Contact the store administrator!",
     "phone": "Incorrect phone number format. Please check your input and try again.",

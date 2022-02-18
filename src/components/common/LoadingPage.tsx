@@ -37,7 +37,7 @@ const LoadingPage: React.FC = () => {
     };
   }, []);
   return redirect
-    ? <Navigate to={isAuth ? "/home" : "/login"}/>
+    ? <Navigate to={isAuth ? "/orders" : "/login"}/>
     : <div className="main-page-wrapper">
       <img alt="Logo" src={companyLogo ? companyLogo : LogoWhite} className="main-page-logo"/>
       <img alt="BackGround" className="bg-image" src={BackGroundImage}/>

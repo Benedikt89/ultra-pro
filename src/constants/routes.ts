@@ -24,8 +24,13 @@ export const routes:Routes = {
     free: false,
     permits: ["ROLE_SUPER_ADMIN", "ROLE_ADMIN", "ROLE_OPERATOR", "ROLE_INSPECTOR"],
   },
-  "home": {
-    path: "/home",
+  "orders": {
+    path: "/orders",
+    free: false,
+    permits: ["ROLE_SUPER_ADMIN", "ROLE_ADMIN"],
+  },
+  "modifications": {
+    path: "/modifications",
     free: false,
     permits: ["ROLE_SUPER_ADMIN", "ROLE_ADMIN"],
   },

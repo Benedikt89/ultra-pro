@@ -1,5 +1,6 @@
-import {AuthActions, LOGOUT_USER_SUCCESS, SET_USER_DATA} from "./actions";
+import {LOGOUT_USER_SUCCESS, SET_USER_DATA} from "./actions";
 import {AuthState} from "../../types/auth-types";
+import {AppActionsType} from "../store";
 
 let initialState: AuthState = {
     userData: {
@@ -13,7 +14,7 @@ let initialState: AuthState = {
     isAuth: false,
 };
 
-const authReducer = (state: AuthState = initialState, action: AuthActions) => {
+const authReducer = (state: AuthState = initialState, action: AppActionsType) => {
     switch (action.type) {
         case SET_USER_DATA: {
             return {

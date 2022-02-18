@@ -1,8 +1,6 @@
-import {
-  AppActions,
-  appActionTypes
-} from "./actions";
+import {appActionTypes} from "./actions";
 import {AppState, ModalType, ModalTypes} from "../../types/app-types";
+import {AppActionsType} from "../store";
 
 const initialState: AppState = {
   isFetching: {},
@@ -26,7 +24,7 @@ const getModalByType = (type: ModalTypes, message: string | null, pass?: string)
     }
 };
 
-const appReducer = (state: AppState = initialState, action: AppActions) => {
+const appReducer = (state: AppState = initialState, action: AppActionsType) => {
   switch (action.type) {
     //setting fetching and frozen status
     case appActionTypes.SET_IS_FETCHING: {

@@ -31,11 +31,13 @@ const Header: React.FC<Props> = ({}) => {
       title={<>
         <img src={logo} alt="logo" className="header-logo"/>
         <Button className="header-icon-button" icon={<img src={headphones} alt="logo"/>}/>
-        <Button className="header-icon-button" icon={<img src={circul} alt="logo"/>}/>
+        <Link to='/modifications'>
+          <Button className="header-icon-button" icon={<img src={circul} alt="logo"/>}/>
+        </Link>
         <Button className="header-icon-button" icon={<img src={info} alt="logo"/>}/>
       </>}
       extra={[
-        <Link to='/home' key="2">
+        <Link to='/orders' key="2">
           <Button type="text">
             {t('header.orders_constructor')}
           </Button>

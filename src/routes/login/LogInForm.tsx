@@ -3,12 +3,12 @@ import {Form as FormikForm, FormikProps, withFormik} from "formik";
 import * as Yup from 'yup';
 import {Button} from "antd";
 import {EyeInvisibleOutlined, EyeTwoTone, LockOutlined, UserOutlined} from '@ant-design/icons';
+import {useTranslation} from "react-i18next";
 
 import {LoginData} from "../../types/auth-types";
-
-import './LogIn.css'
 import {FieldWrapper} from "../../components/forms/FormElements/FormsControls";
-import {useTranslation} from "react-i18next";
+
+import './LogIn.less'
 
 interface FormValues {
   login: string;

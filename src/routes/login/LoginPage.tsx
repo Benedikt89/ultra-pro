@@ -1,14 +1,16 @@
 import React from "react";
 import {connect} from 'react-redux';
+import {Card} from "antd";
+
 import {selectIsAuth} from "../../store/auth/selectors";
 import {AppStateType} from "../../store/store";
 import LogInForm from "./LogInForm";
-import {Card} from "antd";
 import LogoWhite from "../../assets/images/LogoWhite.svg";
-import './LogIn.css'
 import {loginUserThunk} from "../../store/auth/actions";
 import {LoginData} from "../../types/auth-types";
 import {selectErrorByKey, selectFetchingByKey, selectCompanyLogo} from "../../store/app/selectors";
+
+import './LogIn.less'
 
 interface Props {
   error: { message: string } | null

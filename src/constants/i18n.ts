@@ -15,6 +15,7 @@ i18n
   .init({
     debug: process.env.NODE_ENV !== 'production',
     fallbackLng: ["en", "uk"],
+    lng: 'uk',
     supportedLngs: Array.from(LANGUAGES.keys()),
 
     // XHR Backend
