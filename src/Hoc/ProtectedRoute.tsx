@@ -1,12 +1,10 @@
 import * as React from 'react';
-import {useMemo} from "react";
 import {connect} from 'react-redux';
 import {Navigate, RouteProps, Outlet } from 'react-router';
 
-import {selectIsAuth} from "../store/auth/selectors";
-import {AppStateType} from "../store/store";
-import {getRoute} from "../constants/routes";
-import {RolesType} from "../types/auth-types";
+import {selectIsAuth} from "store/auth/selectors";
+import {AppStateType} from "store/store";
+import {RolesType} from "types/auth-types";
 
 interface PrivateRouteProps extends RouteProps {
   isAuth: boolean;
@@ -15,8 +13,8 @@ interface PrivateRouteProps extends RouteProps {
 }
 
 const ProtectedRoute = (props: PrivateRouteProps) => {
-  const { isAuth, routeKey, role } = props;
-  const {permits} = useMemo(() => getRoute(routeKey), [routeKey]);
+  const { isAuth} = props; //, routeKey, role } = props;
+  //const {permits} = useMemo(() => getRoute(routeKey), [routeKey]); // TODO: work with permissions
   const allowed = true;
 
   if (isAuth && !allowed) {

@@ -5,7 +5,7 @@ import {Card} from "antd";
 import {selectIsAuth} from "../../store/auth/selectors";
 import {AppStateType} from "../../store/store";
 import LogInForm from "./LogInForm";
-import LogoWhite from "../../assets/images/LogoWhite.svg";
+import logo from "../../assets/images/logo.png";
 import {loginUserThunk} from "../../store/auth/actions";
 import {LoginData} from "../../types/auth-types";
 import {selectErrorByKey, selectFetchingByKey, selectCompanyLogo} from "../../store/app/selectors";
@@ -22,7 +22,7 @@ interface Props {
 const LoginPage: React.FC<Props> = ({ loginUserThunk, error, isFetching, companyLogo}) => {
   return (
     <div className="log-in-page">
-      <img className="log-in-logo" src={companyLogo ? companyLogo : LogoWhite} alt="Q MATE"/>
+      <img className="log-in-logo" src={companyLogo ? companyLogo : logo} alt="Ultra - Pro"/>
       <Card>
         <LogInForm message="" onSubmit={loginUserThunk} error={error} isFetching={isFetching}/>
       </Card>

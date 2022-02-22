@@ -3,12 +3,12 @@ import {useCallback} from 'react';
 import {Link, useLocation} from "react-router-dom";
 import {Menu} from 'antd';
 import {useTranslation} from "react-i18next";
-
-import {I_navigationItem, navigationOptions} from "../../constants/navigation";
-import LogoWhite from "../../assets/images/LogoWhite.svg";
 import {useSelector} from "react-redux";
-import {AppStateType} from "../../store/store";
-import {selectCompanyLogo} from "../../store/app/selectors";
+
+import {I_navigationItem, navigationOptions} from "constants/navigation";
+import LogoWhite from "assets/images/LogoWhite.svg";
+import {AppStateType} from "store/store";
+import {selectCompanyLogo} from "store/app/selectors";
 
 import './SideBar.css';
 

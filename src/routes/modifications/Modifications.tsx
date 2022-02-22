@@ -5,10 +5,10 @@ import {Button, Typography} from "antd";
 import {FileAddOutlined} from "@ant-design/icons";
 import {useDispatch, useSelector} from "react-redux";
 
-import {AppStateType} from "../../store/store";
-import ModificationSelector from "../../components/common/ModificationSelector";
-import detail from "../../assets/images/mock-detail.png";
-import {addModification} from "../../store/mods/actions";
+import {AppStateType} from "store/store";
+import ModificationSelector from "components/common/ModificationSelector";
+import detail from "assets/images/mock-detail.png";
+import {addModification} from "store/mods/actions";
 
 import "./Modifications.less";
 
@@ -38,7 +38,7 @@ const Modifications: React.FC = () => {
                   <ModificationSelector id={id} key={id} />
                 ))}
               </div>
-              <div className="row-between">
+              <div className="row between">
                 <p> </p>
                 <Button
                   onClick={handleAddModification}

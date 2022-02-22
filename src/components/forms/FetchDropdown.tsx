@@ -25,12 +25,16 @@ interface Props {
   placeholder?: string;
   minWidth?: number;
   url: string;
+  onChange?: (value: Option | null) => void;
+  onBlur?: (value: Option | null) => void
 }
 
-const FetchDropdown: React.FC<Props> = ({url, className, placeholder, minWidth= 200}) => {
+const FetchDropdown: React.FC<Props> = ({url, onChange, onBlur, className, placeholder, minWidth = 200}) => {
   const [loading, setLoading] = useState(false);
-  const [value, setValue] = useState<any>();
+  const [value, setValue] = useState<Option | null>(null);
   const [options, setOptions] = useState<Option[]>([]);
+
+  useEffect(() => onChange && onChange(value), [value, onChange]);
 
   const handleChange = (value: any) => {
     setValue(value);
@@ -63,6 +67,7 @@ const FetchDropdown: React.FC<Props> = ({url, className, placeholder, minWidth= 
         placeholder={placeholder}
         defaultActiveFirstOption={false}
         onChange={handleChange}
+        onBlur={() => onBlur && onBlur(value)}
         loading={loading}
         filterOption={(input, option) => {
           const val: string = typeof option?.children === "string" ? option?.children : "";

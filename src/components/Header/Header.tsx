@@ -5,12 +5,12 @@ import {Link} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 import {useDispatch} from "react-redux";
 
-import {logOut} from "../../store/auth/actions";
-import logo from "../../assets/images/logo.png";
-import headphones from "../../assets/images/icons/headphones.svg";
-import circul from "../../assets/images/icons/circul.svg";
-import info from "../../assets/images/icons/info.svg";
-import exit from "../../assets/images/icons/exit.svg";
+import {logOut} from "store/auth/actions";
+import logo from "assets/images/logo.png";
+import headphones from "assets/images/icons/headphones.svg";
+import circul from "assets/images/icons/circul.svg";
+import info from "assets/images/icons/info.svg";
+import exit from "assets/images/icons/exit.svg";
 
 import './Header.less';
 

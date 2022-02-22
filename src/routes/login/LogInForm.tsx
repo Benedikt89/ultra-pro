@@ -29,23 +29,26 @@ const InnerForm: React.FC<OtherProps & FormikProps<FormValues>> = ({isFetching, 
     <FormikForm>
       {message && <h1>{message}</h1>}
       <FieldWrapper
+        wrapperclassname="mb-2"
         type="text"
         name="login"
-        label={t('label_login')}
+        label={t('login.login.title')}
+        placeholder={t('login.login.placeholder')}
         prefix={<UserOutlined/>}
       />
-
       <FieldWrapper
+        wrapperclassname="mb-3"
         type="password"
         name="password"
-        label={t('label_password')}
+        label={t('login.password.title')}
+        placeholder={t('login.password.placeholder')}
         prefix={<LockOutlined/>}
         iconRender={(visible: boolean) => (visible ? <EyeTwoTone/> : <EyeInvisibleOutlined/>)}
       />
       <div className="col">
         <span>{error ? ' ' : ' '}</span>
         <Button htmlType="submit" type="primary" disabled={isFetching} className="log-in-form-submit">
-          {t('button_login')}
+          {t('login.confirm')}
         </Button>
       </div>
     </FormikForm>

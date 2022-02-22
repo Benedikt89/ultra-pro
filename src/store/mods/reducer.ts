@@ -1,6 +1,7 @@
+import {ModificationsState} from "types/mods-types";
+import {AppActionsType} from "store/store";
+
 import {modsActionTypes} from "./actions";
-import {ModificationsState} from "../../types/mods-types";
-import {AppActionsType} from "../store";
 
 const initialState: ModificationsState = {
   data: {},

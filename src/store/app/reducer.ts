@@ -1,6 +1,7 @@
+import {AppState, ModalType, ModalTypes} from "types/app-types";
+import {AppActionsType} from "store/store";
+
 import {appActionTypes} from "./actions";
-import {AppState, ModalType, ModalTypes} from "../../types/app-types";
-import {AppActionsType} from "../store";
 
 const initialState: AppState = {
   isFetching: {},

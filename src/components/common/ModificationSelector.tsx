@@ -3,14 +3,15 @@ import {Button} from "antd";
 import {DeleteOutlined} from "@ant-design/icons";
 import {useDispatch, useSelector} from "react-redux";
 
-import FetchDropdown from "../forms/FetchDropdown";
-import {AppStateType} from "../../store/store";
-import {selectModById} from "../../store/mods/selectors";
-import {deleteModification} from "../../store/mods/actions";
+import FetchDropdown from "components/forms/FetchDropdown";
+import {AppStateType} from "store/store";
+import {selectModById} from "store/mods/selectors";
+import {deleteModification} from "store/mods/actions";
 
 interface Props {
   id: string;
 }
+
 const ModificationSelector: React.FC<Props> = ({id}) => {
   const mod = useSelector((state: AppStateType) => selectModById(state, id));
   const dispatch = useDispatch();

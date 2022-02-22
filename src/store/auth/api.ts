@@ -1,7 +1,8 @@
 import axios, {AxiosResponse} from "axios";
-import {AuthToFrontUserData, LoginData, ProfileFieldType} from "../../types/auth-types";
-import {apiEndpoints} from "../../constants/api/api";
-import {createAxiosOptions} from "../../utils/axios-options";
+
+import {AuthToFrontUserData, LoginData, ProfileFieldType} from "types/auth-types";
+import {apiEndpoints} from "constants/api/api";
+import {createAxiosOptions} from "utils/axios-options";
 
 export interface RecoverPasswordData {
   old_pass: string,

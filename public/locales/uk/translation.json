@@ -11,9 +11,42 @@
     "logout": "Вихід",
     "orders_constructor": "Конструктор замовлень"
   },
+  "login": {
+    "login": {
+      "title": "Логин",
+      "placeholder": "Введите код доступа"
+    },
+    "password": {
+      "title": "Пароль",
+      "placeholder": ""
+    },
+    "confirm": "Login"
+  },
   "orders": {
     "new_order": "Нове замовлення",
     "title": "Замовлення",
+    "table_title": "Специфікація замовлення",
+    "table": {
+      "add": "Додати",
+      "textures": "Підбір текстури",
+      "no_options": "No options",
+      "select": "Click to select",
+      "sure_delete": "Sure to delete?",
+      "header": {
+        "type": "Тип деталі",
+        "height": "Height",
+        "width": "Width",
+        "quantity": "Quantity",
+        "thick": "Thick",
+        "rollName": "Декор-елемент",
+        "model": "Модель",
+        "frontTexture": "Декоративна решітка",
+        "paint": "Paint",
+        "backTexture": "backTexture",
+        "color": "Color",
+        "areaFacade": "Радіальний фасад"
+      }
+    },
     "order_number": {
       "placeholder": "Введіть номер замовлення"
     },

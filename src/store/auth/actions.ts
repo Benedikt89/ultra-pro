@@ -1,9 +1,10 @@
 import {ThunkDispatch} from "redux-thunk";
 
+import {AuthUserData, LoginData, ProfileFieldType} from "types/auth-types";
+import {AppActionsType, GetStateType} from "store/store";
+import {fetchHandler} from "utils/fetchWrapper";
+
 import {authAPI} from "./api";
-import {AuthUserData, LoginData, ProfileFieldType} from "../../types/auth-types";
-import {AppActionsType, GetStateType} from "../store";
-import {fetchHandler} from "../../utils/fetchWrapper";
 
 export const localStorageKey = process.env.REACT_APP_LS_TOKEN || 'REACT_APP_LS_TOKEN';
 export const localStorageRoleKey = process.env.REACT_APP_USER_ROLE || 'ultra-pro-user-role';

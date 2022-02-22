@@ -1,14 +1,15 @@
 import {batch} from 'react-redux';
 import {message, Modal} from "antd";
 
-import {AppDispatch, GetStateType} from "../store/store";
-import {selectErrorByKey, selectFetchingByKey} from "../store/app/selectors";
-import {_setError, _setFetching} from "../store/app/actions";
-import {selectToken} from "../store/auth/selectors";
-import {APIerrorLogger} from "./errorLogger";
-import {logOut} from "../store/auth/actions";
+import {AppDispatch, GetStateType} from "store/store";
+import {selectErrorByKey, selectFetchingByKey} from "store/app/selectors";
+import {_setError, _setFetching} from "store/app/actions";
+import {selectToken} from "store/auth/selectors";
+import {logOut} from "store/auth/actions";
+import {hasOwnProperty} from "types/typeHelpers";
+
 import {errorMessages} from './errorMessages';
-import {hasOwnProperty} from "../types/typeHelpers";
+import {APIerrorLogger} from "./errorLogger";
 
 export function fetchHandler(key: string, callback: (
   dispatch: AppDispatch,

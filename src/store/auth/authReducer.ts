@@ -1,6 +1,7 @@
+import {AuthState} from "types/auth-types";
+import {AppActionsType} from "store/store";
+
 import {LOGOUT_USER_SUCCESS, SET_USER_DATA} from "./actions";
-import {AuthState} from "../../types/auth-types";
-import {AppActionsType} from "../store";
 
 let initialState: AuthState = {
     userData: {

@@ -2,12 +2,11 @@ import React, {Suspense, useEffect, useState} from 'react';
 import {Provider} from "react-redux";
 import {BrowserRouter as Router,} from "react-router-dom";
 
-import store from "./store/store";
-import Keys from './constants/appKeys';
-import Main from "./routes/Main";
+import store from "store/store";
+import Keys from 'constants/appKeys';
+import Main from "routes/Main";
 
 import "./App.less";
-import 'antd/dist/antd.css';
 
 const App: React.FC = () => {
   const [fetching, setFetching] = useState(true);

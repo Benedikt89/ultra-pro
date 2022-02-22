@@ -7,13 +7,15 @@ import appReducer from "./app/reducer";
 import {AppActions} from "./app/actions";
 import modsReducer from "./mods/reducer";
 import {ModsActions} from "./mods/actions";
+import ordersReducer from "./orders/reducer";
+import {OrdersActions} from "./orders/actions";
 
 const rootReducer = combineReducers({
     app: appReducer,
     auth: authReducer,
     mods: modsReducer,
+    orders: ordersReducer
 });
-
 
 
 const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
@@ -21,7 +23,7 @@ const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
 export type GetStateType = typeof store.getState;
 export type AppStateType = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
-export type AppActionsType = AuthActions | AppActions | ModsActions;
+export type AppActionsType = AuthActions | AppActions | ModsActions | OrdersActions;
 
 export type ThunkAction<
   R, // Return type of the thunk function

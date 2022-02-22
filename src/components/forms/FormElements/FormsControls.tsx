@@ -1,12 +1,9 @@
 import React from 'react';
 import classNames from "classnames";
-import {Input, Tooltip} from "antd";
+import {Input, Tooltip, Select} from "antd";
 import {useField} from "formik";
-import {Select} from 'antd';
 
-const {Option} = Select;
-
-const style = require('./FormControl.module.css');
+import style from './FormControl.module.css';
 
 interface Props {
   type?: string;
@@ -30,7 +27,7 @@ export const FieldWrapper: React.FC<Props> = ({validate, ...props}: Props) => {
   });
 
   return (
-    <div className={props.wrapperclassname ? props.wrapperclassname : ''} style={{marginBottom: '10px'}}>
+    <div className={props.wrapperclassname ? props.wrapperclassname : ''}>
       <label className={style.title}>{props.label}</label>
       <Tooltip visible={touched && !!error}
                title={error ? error : ''}
@@ -42,7 +39,9 @@ export const FieldWrapper: React.FC<Props> = ({validate, ...props}: Props) => {
             : props.type === 'select'
               ? <Select {...field} {...props} style={{width: 360}}>
                 {props?.options?.map((opt: any) => (
-                  <Option value={opt.value} key={opt.value} disabled={opt.disabled}>{opt.title ?? opt.value}</Option>
+                  <Select.Option value={opt.value} key={opt.value} disabled={opt.disabled}>
+                    {opt.title ?? opt.value}
+                  </Select.Option>
                 ))}
               </Select>
               : <Input {...field} {...props} />

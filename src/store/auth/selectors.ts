@@ -1,5 +1,5 @@
-import {AppStateType} from "../store";
-import {AuthUserData, RolesType} from "../../types/auth-types";
+import {AppStateType} from "store/store";
+import {AuthUserData, RolesType} from "types/auth-types";
 
 export const selectIsAuth = (state:AppStateType): boolean =>
     state.auth.isAuth && !!state.auth.userData.Authorization;
