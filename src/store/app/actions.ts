@@ -55,8 +55,8 @@ export const _setFetching = (key: string, status: boolean): SetFetching =>
 export const _setError = (key: string, message: string | null): SetError =>
   ({type: appActionTypes.SET_ERROR, key, message});
 
-export const setModal = (modalType: ModalTypes | null, message: string | null, pass?: string): SetModal => {
-  return ({type: appActionTypes.SET_MODAL, modalType, message, pass});
+export const setModal = (modalType: ModalTypes | null, message: string | null): SetModal => {
+  return ({type: appActionTypes.SET_MODAL, modalType, message});
 };
 
 export const setTheme = (theme: string): SetTheme => {

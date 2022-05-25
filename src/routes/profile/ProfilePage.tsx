@@ -13,7 +13,7 @@ import {getUserDataThunk, recoverPasswordThunk, updateUserDataThunk} from "../..
 import {RecoverPasswordData} from "../../store/auth/api";
 import {AuthUserData, ProfileFieldType} from "../../types/auth-types";
 import {setModal} from "../../store/app/actions";
-import {ModalTypes} from "../../types/app-types";
+import {MODAL, ModalTypes} from "../../types/app-types";
 
 import "./ProfilePage.css";
 
@@ -29,7 +29,7 @@ interface PageProps {
 }
 
 interface PageDispatchProps {
-  setModal: (type: null | ModalTypes, message: string | null, pass?: string) => void
+  setModal: (type: null | ModalTypes, message: string | null) => void
   recoverPasswordThunk: (data: RecoverPasswordData) => void
   updateUserDataThunk: (data: ProfileFieldType[]) => void
   getUserDataThunk: () => void
@@ -58,10 +58,10 @@ class ProfilePage extends Component<PageProps & PageDispatchProps, PageState> {
   componentDidUpdate(prevProps: Readonly<PageProps & PageDispatchProps>, prevState: Readonly<PageState>, snapshot?: any): void {
     if (!this.props.isFetchingPass && prevProps.isFetchingPass && this.state.waitForPass && !this.props.errorPass) {
       this.setState({waitForPass: false});
-      this.props.setModal('success', 'reset_pass_success');
+      this.props.setModal(MODAL.SUCCESS, 'success.reset_pass_success');
     }
     if (!this.props.isFetchingUpdate && prevProps.isFetchingUpdate && this.state.waitForSucess && !this.props.error) {
-      this.props.setModal('success', 'update_user_data_success');
+      this.props.setModal(MODAL.SUCCESS, 'success.update_user_data_success');
     }
   }
 

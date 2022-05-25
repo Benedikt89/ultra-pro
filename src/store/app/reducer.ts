@@ -12,17 +12,10 @@ const initialState: AppState = {
   theme: "dark",
 };
 
-const getModalByType = (type: ModalTypes, message: string | null, pass?: string): ModalType => {
-    if (type === 'error') {
-        return {type: "error", message: message ? message : 'modal_error_default_message', title: 'modal_error_default_title'}
-    } else {
-        return {
-          type: "success",
-          message: !message ? 'modal_success_default_message'
-              : message === 'user_created' ? 'modal_success_user_created'
-              : message,
-          title:  'modal_success_default_title', pass}
-    }
+const getModalByType = (type: ModalTypes, message: string | null): ModalType => {
+  const messageKey = `${type}.${message ? message : `modal_${type}_default_message`}`;
+  const title = `${type}.${message ? message : `modal_${type}_default_title`}`;
+  return { type, message: messageKey, title }
 };
 
 const appReducer = (state: AppState = initialState, action: AppActionsType) => {
@@ -57,7 +50,7 @@ const appReducer = (state: AppState = initialState, action: AppActionsType) => {
     case appActionTypes.SET_MODAL: {
       return {
           ...state,
-          modal: action.modalType ? getModalByType(action.modalType, action.message, action.pass) : null
+          modal: action.modalType ? getModalByType(action.modalType, action.message) : null
       }
     }
     case appActionTypes.SET_COMPANY_CONFIG: {

@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {Route, Routes, useLocation, useNavigate} from "react-router";
 import {Button, Modal, Result} from "antd";
 import {connect} from "react-redux";
+import {useTranslation} from "react-i18next";
 
 import {AppStateType} from "../store/store";
 import {selectIsAuth} from "../store/auth/selectors";
@@ -11,7 +12,7 @@ import ProfilePage from "./profile/ProfilePage";
 import LoginPage from "./login/LoginPage";
 import ProtectedRoute from "../Hoc/ProtectedRoute";
 import {AuthUserData, LoginData} from "../types/auth-types";
-import {ModalType, ModalTypes} from "../types/app-types";
+import {MODAL, ModalType, ModalTypes} from "../types/app-types";
 import {setModal} from "../store/app/actions";
 import uiVersion from '../GitInfo.json'
 import Header from "../components/Header/Header";
@@ -21,6 +22,7 @@ import OrdersPage from "./orders/Orders";
 import Modifications from "./modifications/Modifications";
 
 import './Main.less';
+import ModificationModal from "./modifications/modal/ModificationModal";
 
 interface Props {}
 
@@ -32,7 +34,7 @@ interface ConnectedProps {
 }
 
 interface DispatchedProps {
-  setModal: (type: null | ModalTypes, message: string | null, pass?: string) => void
+  setModal: (type: null | ModalTypes, message: string | null) => void
   _setAuthUserData: (payload: AuthUserData) => void
   loginUserThunk: (data: LoginData, commonAuth?: AuthUserData) => void
 }
@@ -53,6 +55,7 @@ const Main: React.FC<MainProps> = ({
                                      _setAuthUserData,
                                      loginUserThunk,
                                    }) => {
+  const {t} = useTranslation();
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const [state, setState] = useState<MainState>({
@@ -110,29 +113,39 @@ const Main: React.FC<MainProps> = ({
                 <Route path="" element={<Modifications />} />
               </Route>
 
-              <Route path="*" element={<div>Error 404</div>}/>
+              <Route path="*" element={<Result
+                status="404"
+                title={t("error.404.title")}
+                subTitle={t("error.404.subtitle")}
+                extra={<Button type="primary">{t("error.go_back")}</Button>}
+              />}/>
             </Routes>
           </div>
         }
         <span className="ui-version">v.{uiVersion.gitCommitHash}</span>
       </main>
       <Modal
-        title={modal && modal.title}
+        title={modal && t(modal.title)}
         centered
+        width={modal?.type === MODAL.MODIFICATION ? 800 : undefined}
         confirmLoading={false}
         visible={!!modal}
-        footer={[
+        footer={(modal && modal?.type !== MODAL.MODIFICATION) && [
           <Button key="back" onClick={() => setModal(null, null)}>
-            {'button_return'}
+            {t(`${modal?.type ?? ""}.go_back`)}
           </Button>
         ]}
         onCancel={() => setModal(null, null)}
       >
-        {modal && <Result
-          status={modal.type}
-          title={modal.type}
-          subTitle={''}
-        />}
+        {!modal ? null : modal?.type === MODAL.MODIFICATION ? (
+          <ModificationModal />
+        ) : (
+          <Result
+            status={modal.type}
+            title={t(modal.type)}
+            subTitle={t(modal.message)}
+          />
+        )}
       </Modal>
     </div>
   );

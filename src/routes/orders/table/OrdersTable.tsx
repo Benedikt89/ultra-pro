@@ -7,6 +7,8 @@ import {ColumnType, columnTypes} from "types/orders-types";
 import {AppStateType} from "store/store";
 import {onAddRow} from "store/orders/actions";
 import {selectFetchingByKey} from "store/app/selectors";
+import {setModal} from "store/app/actions";
+import {MODAL} from "types/app-types";
 
 import EditableCell from "./EditableCell";
 import OperationsCell from "./OperationsCell";
@@ -49,7 +51,6 @@ const generateColumns = (t: TFunction): ColumnItemType[] => {
     return res;
   })
 }
-
 
 const OrdersTable:React.FC = () => {
   const {t} = useTranslation();
@@ -96,10 +97,10 @@ const OrdersTable:React.FC = () => {
         scroll={{x: 1600}}
       />
       <div className="row between">
-        <Button onClick={handleAdd} type="primary" loading={loading} >
+        <Button onClick={handleAdd} type="primary" loading={loading}>
           {t("orders.table.add")}
         </Button>
-        <Button type="primary" >
+        <Button type="primary" onClick={() => dispatch(setModal(MODAL.MODIFICATION, "modal_title"))}>
           {t("orders.table.textures")}
         </Button>
       </div>

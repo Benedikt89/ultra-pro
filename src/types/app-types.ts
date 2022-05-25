@@ -1,4 +1,16 @@
-export type ModalTypes = 'error' | 'success' | 'info' | 'warning';
+export type ModalTypesOld = 'error' | 'success' | 'info' | 'warning' | 'modification';
+
+export const MODAL = {
+    ERROR: 'error',
+    SUCCESS: 'success',
+    INFO: 'info',
+    WARNING: 'warning',
+    MODIFICATION: 'mods',
+} as const;
+
+type Keys = keyof typeof MODAL;
+export type ModalTypes = typeof MODAL[Keys]
+
 
 export interface AppState {
     isFetching: {[key: string]: boolean},

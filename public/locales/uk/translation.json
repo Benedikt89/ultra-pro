@@ -81,7 +81,8 @@
   "mods": {
     "mods_title": "Журнал модифікацій",
     "image_title": "Остаточний вид деталі зі всіма доданими модифікаціями і бічними видами",
-    "add_mod": "Додати модифікацію"
+    "add_mod": "Додати модифікацію",
+    "modal_title": "Вікно додавання модифікації"
   },
   "keyboard": {
     "meta": "123",
@@ -95,24 +96,18 @@
   },
 
   "error": {
-    "global": "Щось пішло не так, зверніться до оператора!",
-    "phone": "Невірний формат номеру телефону. Будь ласка, перевірте правильність вводу та спробуйте ще раз.",
-    "idleParagraph1": "Через декілька секунд система",
-    "idleParagraph2": "повернеться на початок,",
-    "idleParagraph3": "Натисніть на екран, якщо",
-    "idleParagraph4": "бажаєте продовжити!",
-    "messageServiceUnavailableRegistration": "послуга тимчасово недоступна, будь ласка зверніться до адміністратора!",
-    "messageServiceError": "Щось пішло не так, зверніться до оператора!",
-    "messageBranchParamNotSpecified": "branchId обов'язковий параметр!",
-    "messagePrintServiceProblems": "Проблеми зі службою друку",
-    "queueRequestError": "Помилка запиту до черги",
-    "queueServerError": "Помилка серверу черги",
-    "routingRequestQueueError": "Помилка маршрутизації запиту до черги",
-    "printingTicketRequestError": "Помилка запиту на друк талону",
-    "ticketPrintServerError": "Помилка серверу друку талону",
-    "routingPrintTicketRequestError": "Помилка маршрутизації запиту на друк талону"
+    "404": {
+      "title": "404",
+      "subtitle": "Sorry, you are not authorized to access this page."
+    },
+    "go_back": "Back Home",
+    "global": "Щось пішло не так!"
   },
   "success": {
+    "modal_success_default_title": "Success!",
+    "reset_pass_success":  "reset_pass_successfully!",
+    "update_user_data_success": "User data updated",
+    "go_back": "Back Home",
     "header": "Ви зареєстровані",
     "ticket_created": "Будь ласка, заберіть талон та очікуйте на запрошення! Ваш номер талону буде відображено на інформаційному табло.",
     "sms_created_line_1": "Вам відправлено SMS.",

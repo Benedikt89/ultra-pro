@@ -81,26 +81,24 @@
   "mods": {
     "mods_title": "Журнал модифікацій",
     "image_title": "Остаточний вид деталі зі всіма доданими модифікаціями і бічними видами",
-    "add_mod": "Add modification"
+    "add_mod": "Add modification",
+    "modal_title": "Вікно додавання модифікації",
+    "go_back": "Відмінити",
+    "add": "Додати"
   },
   "error": {
-    "global": "Something went wrong. Contact the store administrator!",
-    "phone": "Incorrect phone number format. Please check your input and try again.",
-    "idleParagraph1": "Time to make choice is over.",
-    "idleParagraph2": "In a few seconds the system will go back to the start screen.",
-    "idleParagraph3": "Click «Cancel», If you want to stay on this page.",
-    "messageServiceUnavailableRegistration": "There are no free operators!",
-    "messageServiceError": "Something went wrong. Contact the store administrator!",
-    "messageBranchParamNotSpecified": "branchId required parameter!",
-    "messagePrintServiceProblems": "Print Service Problems",
-    "queueRequestError": "Queue request error",
-    "queueServerError": "Queue server error",
-    "routingRequestQueueError": "Error routing request to queue",
-    "printingTicketRequestError": "Error printing ticket request",
-    "ticketPrintServerError": "Ticket print server error",
-    "routingPrintTicketRequestError": "Error routing print ticket request"
+    "404": {
+      "title": "404",
+      "subtitle": "Sorry, you are not authorized to access this page."
+    },
+    "go_back": "Back Home",
+    "global": "Something went wrong!"
   },
   "success": {
+    "modal_success_default_title": "Success!",
+    "reset_pass_success":  "reset_pass_successfully!",
+    "update_user_data_success": "User data updated",
+    "go_back": "Back Home",
     "header": "You have been logged successfully",
     "ticket_created": "Please take your ticket and wait for the call.",
     "sms_created_line_1": "SMS is sent to your number.",
