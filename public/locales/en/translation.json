@@ -73,10 +73,10 @@
       "placeholder": "Виберіть місто"
     },
     "footer": {
-      "save_order":  "Зберегти замовлення",
-      "save_options":  "Зберегти креслення",
-      "save_spec":  "Зберегти специфікацію",
-      "save_cnc":  "Зберегти CNC",
+      "save_order": "Зберегти замовлення",
+      "save_options": "Зберегти креслення",
+      "save_spec": "Зберегти специфікацію",
+      "save_cnc": "Зберегти CNC",
       "save_materials": "Зберегти розрахунок матеріалів"
     }
   },
@@ -103,7 +103,7 @@
   },
   "success": {
     "modal_success_default_title": "Success!",
-    "reset_pass_success":  "reset_pass_successfully!",
+    "reset_pass_success": "reset_pass_successfully!",
     "update_user_data_success": "User data updated",
     "go_back": "Back Home",
     "header": "You have been logged successfully",
