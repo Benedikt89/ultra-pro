@@ -2,7 +2,7 @@
   "name": "ultra-pro",
   "version": "0.1.0",
   "private": false,
-  "homepage": "https://Benedikt89.github.io/ultra-pro",
+  "homepage": "https://Benedikt89.github.io/ultra-pro/",
   "dependencies": {
     "@craco/craco": "^6.1.1",
     "@testing-library/jest-dom": "^5.11.4",
@@ -46,7 +46,7 @@
     "lint": "eslint '*/**/*.{js,ts,tsx}' --quiet --fix",
     "eject": "react-scripts eject",
     "predeploy": "npm run build-dev",
-    "deploy": "gh-pages -d build-dev"
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
