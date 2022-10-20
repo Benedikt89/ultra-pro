@@ -1,0 +1,125 @@
+{
+  "navigation": {
+    "forward": "Продовжити",
+    "backward": "Повернутися",
+    "cancel": "Відмінити",
+    "to_main_menu": "На головний екран",
+    "without_number": "Без номера",
+    "send_sms": "Відправити SMS"
+  },
+  "header": {
+    "logout": "Вихід",
+    "orders_constructor": "Конструктор замовлень"
+  },
+  "login": {
+    "login": {
+      "title": "Логин",
+      "placeholder": "Введите код доступа"
+    },
+    "password": {
+      "title": "Пароль",
+      "placeholder": ""
+    },
+    "confirm": "Login"
+  },
+  "orders": {
+    "new_order": "Нове замовлення",
+    "title": "Замовлення",
+    "table_title": "Специфікація замовлення",
+    "table": {
+      "add": "Додати",
+      "textures": "Підбір текстури",
+      "no_options": "No options",
+      "select": "Click to select",
+      "sure_delete": "Sure to delete?",
+      "header": {
+        "index": "№",
+        "type": "Тип деталі",
+        "height": "Висота",
+        "operation": "Дії",
+        "width": "Ширина",
+        "quantity": "Кількість",
+        "thick": "Товстий",
+        "paint": "Малюй",
+        "backTexture": "задня текстура",
+        "color": "Колір",
+        "rollName": "Декор-елемент",
+        "model": "Модель",
+        "frontTexture": "Декоративна решітка",
+        "areaFacade": "Радіальний фасад"
+      }
+    },
+    "order_number": {
+      "placeholder": "Введіть номер замовлення"
+    },
+    "series": {
+      "title": "Серія",
+      "placeholder": "Виберіть серію"
+    },
+    "date": {
+      "title": "Дата",
+      "placeholder": "Виберіть дату"
+    },
+    "customer": {
+      "title": "Замовник (ПІБ)",
+      "placeholder": "Іванов Іван"
+    },
+    "phone": {
+      "title": "Контактний телефон",
+      "placeholder": "+38 (___) ___-__-__"
+    },
+    "city": {
+      "title": "Місто",
+      "placeholder": "Виберіть місто"
+    },
+    "footer": {
+      "save_order":  "Зберегти замовлення",
+      "save_options":  "Зберегти креслення",
+      "save_spec":  "Зберегти специфікацію",
+      "save_cnc":  "Зберегти CNC",
+      "save_materials": "Зберегти розрахунок матеріалів"
+    }
+  },
+  "mods": {
+    "mods_title": "Журнал модифікацій",
+    "image_title": "Остаточний вид деталі зі всіма доданими модифікаціями і бічними видами",
+    "add_mod": "Додати модифікацію",
+    "modal_title": "Вікно додавання модифікації",
+    "height": "Висота",
+    "width": "Ширина",
+    "radius": "Радіус",
+    "offsetX": "Зміщення по X",
+    "offsetY": "Зміщення по Y",
+    "go_back": "Відмінити",
+    "add": "Додати"
+  },
+  "keyboard": {
+    "meta": "123",
+    "meta_active": "ABC",
+    "language": "UA",
+    "space": " ",
+    "shift": "SHIFT",
+    "shift_active": "Shift",
+    "forward": "далі",
+    "back": "Повернутися"
+  },
+
+  "error": {
+    "404": {
+      "title": "404",
+      "subtitle": "Sorry, you are not authorized to access this page."
+    },
+    "go_back": "Back Home",
+    "global": "Щось пішло не так!"
+  },
+  "success": {
+    "modal_success_default_title": "Success!",
+    "reset_pass_success":  "reset_pass_successfully!",
+    "update_user_data_success": "User data updated",
+    "go_back": "Back Home",
+    "header": "Ви зареєстровані",
+    "ticket_created": "Будь ласка, заберіть талон та очікуйте на запрошення! Ваш номер талону буде відображено на інформаційному табло.",
+    "sms_created_line_1": "Вам відправлено SMS.",
+    "sms_created_line_2": "Очікуйте виклику."
+  }
+}

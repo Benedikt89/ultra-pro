@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/ultra-pro/static/css/main.23e21898.css",
+    "main.js": "/ultra-pro/static/js/main.4b647102.js",
+    "static/js/787.8eb1a052.chunk.js": "/ultra-pro/static/js/787.8eb1a052.chunk.js",
+    "static/media/mock-detail.png": "/ultra-pro/static/media/mock-detail.9dbb10435905cdfa70bd.png",
+    "static/media/logo.png": "/ultra-pro/static/media/logo.9f3613a92cecaf4db9f4.png",
+    "static/media/headphones.svg": "/ultra-pro/static/media/headphones.08cd64f7972e41eaffb6413bd2482e6b.svg",
+    "static/media/BackGround.svg": "/ultra-pro/static/media/BackGround.b508458346463bb562d4846af56af687.svg",
+    "static/media/exit.svg": "/ultra-pro/static/media/exit.294480abd6ee1cb46fbddfceaafbef9e.svg",
+    "static/media/info.svg": "/ultra-pro/static/media/info.62947d494ac3a9805b7bb2ef721f987f.svg",
+    "index.html": "/ultra-pro/index.html",
+    "static/media/circul.svg": "/ultra-pro/static/media/circul.9e3fe157d13d43d89de1eab7bf28d968.svg",
+    "main.23e21898.css.map": "/ultra-pro/static/css/main.23e21898.css.map",
+    "main.4b647102.js.map": "/ultra-pro/static/js/main.4b647102.js.map",
+    "787.8eb1a052.chunk.js.map": "/ultra-pro/static/js/787.8eb1a052.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.23e21898.css",
+    "static/js/main.4b647102.js"
+  ]
+}
