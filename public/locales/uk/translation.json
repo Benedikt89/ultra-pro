@@ -33,17 +33,19 @@
       "select": "Click to select",
       "sure_delete": "Sure to delete?",
       "header": {
+        "index": "№",
         "type": "Тип деталі",
-        "height": "Height",
-        "width": "Width",
-        "quantity": "Quantity",
-        "thick": "Thick",
+        "height": "Висота",
+        "operation": "Дії",
+        "width": "Ширина",
+        "quantity": "Кількість",
+        "thick": "Товстий",
+        "paint": "Малюй",
+        "backTexture": "задня текстура",
+        "color": "Колір",
         "rollName": "Декор-елемент",
         "model": "Модель",
         "frontTexture": "Декоративна решітка",
-        "paint": "Paint",
-        "backTexture": "backTexture",
-        "color": "Color",
         "areaFacade": "Радіальний фасад"
       }
     },
@@ -82,7 +84,14 @@
     "mods_title": "Журнал модифікацій",
     "image_title": "Остаточний вид деталі зі всіма доданими модифікаціями і бічними видами",
     "add_mod": "Додати модифікацію",
-    "modal_title": "Вікно додавання модифікації"
+    "modal_title": "Вікно додавання модифікації",
+    "height": "Висота",
+    "width": "Ширина",
+    "radius": "Радіус",
+    "offsetX": "Зміщення по X",
+    "offsetY": "Зміщення по Y",
+    "go_back": "Відмінити",
+    "add": "Додати"
   },
   "keyboard": {
     "meta": "123",

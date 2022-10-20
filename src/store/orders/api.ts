@@ -2,7 +2,7 @@ import {Option} from "../../types/orders-types";
 
 const getOption = (i: number = 0, title?: string): Option => ({
   id: Math.random() + "opt_id",
-  title: (title ? title : "some option") + i
+  title: `${(title ? title : "some option")} ${i}`
 });
 
 function delay(time: number, callback: () => void) {
@@ -17,7 +17,7 @@ const getOptions = (title?: string, fixed?: number): Option[] =>
 
 export const ordersAPI = {
   async getOptions(title?: string, fixed?: number): Promise<Option[] | never | any> {
-    await delay(Math.random() + 1100, () => {});
+    await delay(Math.random() * 100, () => {});
     return getOptions(title, fixed);
   },
 }

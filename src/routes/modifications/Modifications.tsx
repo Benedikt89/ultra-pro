@@ -9,6 +9,8 @@ import {AppStateType} from "store/store";
 import ModificationSelector from "components/common/ModificationSelector";
 import detail from "assets/images/mock-detail.png";
 import {addModification} from "store/mods/actions";
+import {setModal} from "store/app/actions";
+import {MODAL} from "types/app-types";
 
 import "./Modifications.less";
 
@@ -19,6 +21,7 @@ const Modifications: React.FC = () => {
 
   const handleAddModification = useCallback(() => {
     dispatch(addModification());
+    dispatch(setModal(MODAL.MODIFICATION, "modal_title"));
   }, []);
 
   return (

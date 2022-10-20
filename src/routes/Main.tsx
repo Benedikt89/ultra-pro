@@ -4,22 +4,23 @@ import {Button, Modal, Result} from "antd";
 import {connect} from "react-redux";
 import {useTranslation} from "react-i18next";
 
-import {AppStateType} from "../store/store";
-import {selectIsAuth} from "../store/auth/selectors";
-import {selectErrorByKey, selectFetchingByKey} from "../store/app/selectors";
-import {_setAuthUserData, localStorageKey, loginUserThunk} from "../store/auth/actions";
-import ProfilePage from "./profile/ProfilePage";
-import LoginPage from "./login/LoginPage";
-import ProtectedRoute from "../Hoc/ProtectedRoute";
-import {AuthUserData, LoginData} from "../types/auth-types";
-import {MODAL, ModalType, ModalTypes} from "../types/app-types";
-import {setModal} from "../store/app/actions";
-import uiVersion from '../GitInfo.json'
-import Header from "../components/Header/Header";
-import LoadingPage from "../components/common/LoadingPage";
-import useEffectOnce from "../utils/hooks/useEffectOnce";
+import {AppStateType} from "store/store";
+import {selectIsAuth} from "store/auth/selectors";
+import {selectErrorByKey, selectFetchingByKey} from "store/app/selectors";
+import {_setAuthUserData, localStorageKey, loginUserThunk} from "store/auth/actions";
+import ProtectedRoute from "Hoc/ProtectedRoute";
+import {AuthUserData, LoginData} from "types/auth-types";
+import {MODAL, ModalType, ModalTypes} from "types/app-types";
+import {setModal} from "store/app/actions";
+import uiVersion from 'GitInfo.json'
+import Header from "components/Header/Header";
+import LoadingPage from "components/common/LoadingPage";
+
+import useEffectOnce from "utils/hooks/useEffectOnce";
 import OrdersPage from "./orders/Orders";
 import Modifications from "./modifications/Modifications";
+import ProfilePage from "./profile/ProfilePage";
+import LoginPage from "./login/LoginPage";
 
 import './Main.less';
 import ModificationModal from "./modifications/modal/ModificationModal";
@@ -85,7 +86,6 @@ const Main: React.FC<MainProps> = ({
 
   useEffect(() => {
     let url = !isAuth ? '/login' : state.prevUrl ? state.prevUrl : '/orders';
-    console.log('redirect ===> ' + url);
     navigate(url);
   }, [isAuth])
 
@@ -129,6 +129,7 @@ const Main: React.FC<MainProps> = ({
         centered
         width={modal?.type === MODAL.MODIFICATION ? 800 : undefined}
         confirmLoading={false}
+        forceRender={true}
         visible={!!modal}
         footer={(modal && modal?.type !== MODAL.MODIFICATION) && [
           <Button key="back" onClick={() => setModal(null, null)}>

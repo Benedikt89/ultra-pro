@@ -8,7 +8,6 @@ const initialState: OrdersState = {
   ids: []
 };
 
-
 const ordersReducer = (state: OrdersState = initialState, action: AppActionsType): OrdersState => {
   switch (action.type) {
     case ordersTypes.ADD_ROW: {
@@ -17,6 +16,19 @@ const ordersReducer = (state: OrdersState = initialState, action: AppActionsType
         ...state,
         rows: {...state.rows, [newOne.id]: newOne},
         ids: [...state.ids, newOne.id]
+      };
+    }
+    case ordersTypes.DUPLICATE_ROW: {
+      const found = state.rows[action.id];
+      if (!found) return state;
+      const newOne: DataRow = {...found, id: Math.random() + "row_id"};
+      const foundIndex = state.ids.indexOf(action.id);
+      const newIds = [...state.ids]
+      newIds.splice(foundIndex, 0, newOne.id);
+      return {
+        ...state,
+        rows: {...state.rows, [newOne.id]: newOne},
+        ids: newIds
       };
     }
     case ordersTypes.REMOVE_ROW: {

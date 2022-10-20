@@ -98,7 +98,7 @@ const OrdersPage: React.FC = () => {
       </div>
       <div className="orders-footer">
         {["save_order", "save_options", "save_spec", "save_cnc", "save_materials"].map(key => (
-          <Button type="primary" key={key}>
+          <Button type="primary" key={key} disabled={true}>
             {t(`orders.footer.${key}`)}
           </Button>
         ))}

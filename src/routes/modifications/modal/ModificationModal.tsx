@@ -1,20 +1,22 @@
-import React, {CSSProperties, useMemo, useState} from "react";
+import React, {CSSProperties, useCallback, useMemo, useState} from "react";
 import {useTranslation} from "react-i18next";
 import {Button, Input, Select} from "antd";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {FileAddOutlined} from "@ant-design/icons";
 
 import {setModal} from "store/app/actions";
 import DetailPicker from "components/forms/DetailPicker/DetailPicker";
+import FetchDropdown from "components/forms/FetchDropdown";
+import {selectEditingMod} from "store/mods/selectors";
+import {ModificationData, ModificationCoordsKeys} from "types/mods-types";
+import {modDefaults} from "store/mods/reducer";
+import {deleteModification, saveModification} from "store/mods/actions";
+import {Option} from "types/orders-types";
 
 import "./ModificationsModal.less";
 
-const optionsKeys = ["height", "width", "radius", "offsetX", "offsetY"] as const;
 const corners = ["top-left", "top-right", "bottom-left", "bottom-right"];
 const borders = ["left", "right", "top", "bottom"];
-
-type InputsKeys = typeof optionsKeys;
-type InputKey = InputsKeys[number]
 
 const detailS: CSSProperties = {
   width: 180,
@@ -25,16 +27,18 @@ const modS: CSSProperties = {
   height: 98
 }
 
-type Values = {
-  [key in InputKey]: number;
-};
+function capitalizeFirst(string: string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
 
 const ModificationModal: React.FC = () => {
   const {t} = useTranslation();
   const dispatch = useDispatch();
-  const [activeKey, setActiveKey] = useState<string>("");
-  const [values, setValues] = useState<Values>({offsetX: 0, offsetY: 0, height: 98, width: 49, radius: 0});
+  const modification = useSelector(selectEditingMod);
 
+  const [activeKey, setActiveKey] = useState<string>("");
+  const [values, setValues] = useState<ModificationData>(modification ? modification.data : modDefaults);
+  const [error, setError] = useState(false);
 
   const calcStyles = useMemo(() => ({
     ...modS,
@@ -45,7 +49,28 @@ const ModificationModal: React.FC = () => {
     borderRadius: `${values.radius}%`
   }), [values]);
 
-  return (
+  const handleAddModification = useCallback(() => {
+    if (!values.modType) {
+      setError(true);
+      return;
+    }
+    modification && dispatch(saveModification({...modification, data: values}));
+    dispatch(setModal(null, null));
+  }, [modification, values]);
+
+  const onModTypeChange = useCallback((v: Option | null, modTypeOptions) => {
+    error && setError(false);
+    setValues(values => ({...values, modType: v, modTypeOptions}))
+  }, [error]);
+
+  const onClose = useCallback(() => {
+    dispatch(setModal(null, null));
+    if (!modification?.data.modType && !values.modType) {
+      dispatch(deleteModification(modification?.id ?? ''))
+    }
+  }, [modification, values])
+
+  return !modification ? null : (
     <div className="col">
       <div className="mod-modal-content">
         <div className="col between">
@@ -53,8 +78,33 @@ const ModificationModal: React.FC = () => {
             <div className="inputs-wrapper">
               <DetailPicker activeKey={activeKey} setActiveKey={setActiveKey}/>
               <div className="col">
-                <div className="mb-2"><Select placeholder={"Обрати ручку J"} style={{width: 200}} /></div>
-                <div className="mb-2"><Select placeholder={"Обрати модифікацію"} style={{width: 200}} /></div>
+                <div className="mb-2">
+                  <FetchDropdown
+                    type="ручка"
+                    url={`${modification.id}/forms`}
+                    placeholder={"Обрати ручку J"}
+                    style={{width: 200}}
+                    onChange={(formType, formTypeOptions) => setValues(values => ({
+                      ...values,
+                      formType,
+                      formTypeOptions
+                    }))}
+                    initialValue={modification?.data.formType ?? null}
+                    initialOptions={modification.data.formTypeOptions}
+                  />
+                </div>
+                <div className="mb-2">
+                  <FetchDropdown
+                    type="модифікація"
+                    url={`${modification.id}/mods`}
+                    placeholder={"Обрати модифікацію"}
+                    style={{width: 200}}
+                    onChange={onModTypeChange}
+                    error={error}
+                    initialValue={modification?.data.modType}
+                    initialOptions={modification?.data.modTypeOptions}
+                  />
+                </div>
                 <div className="mb-2">
                   <Select
                     style={{width: 200}} placeholder={"Обрати кут"}
@@ -74,9 +124,9 @@ const ModificationModal: React.FC = () => {
               </div>
             </div>
             <div className="col w-full">
-              {optionsKeys.map(key => (
+              {ModificationCoordsKeys.map(key => (
                 <div className="row between mb-2" key={key}>
-                  <label>some {key}</label>
+                  <label>{t(`mods.${key}`)}</label>
                   <Input
                     style={{width: 200}}
                     value={values[key]}
@@ -94,23 +144,26 @@ const ModificationModal: React.FC = () => {
             <Button
               key="add" type="primary"
               icon={<FileAddOutlined/>}
-              onClick={() => dispatch(setModal(null, null))}
+              onClick={handleAddModification}
             >
               {t(`mods.add`)}
             </Button>
-            <Button key="back" onClick={() => dispatch(setModal(null, null))}>
+            <Button key="back" onClick={onClose}>
               {t(`mods.go_back`)}
             </Button>
           </div>
         </div>
         <div className="col">
           <div className="plan-wrapper">
-            <div className="detail" style={borders.includes(activeKey) ? {
-              ...detailS,
-              [`border-${activeKey}`]: "2px solid black"
-            } : detailS}>
+            <div
+              className="detail"
+              style={borders.includes(activeKey) ? {
+                ...detailS,
+                [`border${capitalizeFirst(activeKey)}`]: "2px solid black"
+              } : detailS}
+            >
               {corners.includes(activeKey) && (
-                <span className={`active-corner ${activeKey}`} />
+                <span className={`active-corner ${activeKey}`}/>
               )}
               <div className={`modification-wrap`} style={calcStyles}>
                 <div className="modification-wrap-height">{values.height}</div>

@@ -14,6 +14,7 @@ interface EditableCellProps {
   _columnType: ColumnType;
   dataIndex: ColumnType;
   record_id: string;
+  i: number;
 }
 
 const EditableCell: React.FC<EditableCellProps> = ({
@@ -21,6 +22,7 @@ const EditableCell: React.FC<EditableCellProps> = ({
                                                      _columnType,
                                                      record_id,
                                                      dataIndex,
+                                                     i,
                                                      ...restProps
                                                    }) => {
   const {t} = useTranslation();
@@ -55,28 +57,31 @@ const EditableCell: React.FC<EditableCellProps> = ({
     setEditing(false);
   }, [loading]);
 
-  let childNode = children;
-
-  if (cellData && !cellData.disabled) {
-    childNode = editing ? (
-      <DropdownSelect
-        minWidth={160}
-        onChange={onChange}
-        loading={loading}
-        autoFocus={true}
-        value={cellData?.selected?.id ?? undefined}
-        onBlur={handleBlur}
-        options={cellData.options.map(opt => ({label: opt.title, value: opt.id}))}
-      />
-    ) : (
-      <div className="editable-cell-value-wrap" style={{paddingRight: 24, minWidth: 200}} onClick={toggleEdit}>
-        {cellData.selected ? cellData.selected.title
-          : !cellData?.options.length ? t("orders.table.no_options") : t("orders.table.select")
-        }
-      </div>
-    );
-  }
-  return (<td {...restProps}>{childNode}</td>);
+  return (
+    <td {...restProps}>
+      {
+        _columnType === "index" ? (
+          <div className="editable-cell-value-wrap">{i + 1}</div>
+        ) : cellData && !cellData.disabled ? (
+          <DropdownSelect
+            minWidth={160}
+            onChange={onChange}
+            loading={loading}
+            autoFocus={true}
+            value={cellData?.selected?.id ?? undefined}
+            onBlur={handleBlur}
+            options={cellData.options.map(opt => ({label: opt.title, value: opt.id}))}
+          />
+        ) : cellData && !cellData.disabled ? (
+          <div className="editable-cell-value-wrap" style={{paddingRight: 24, minWidth: 200}} onClick={toggleEdit}>
+            {cellData.selected ? cellData.selected.title
+              : !cellData?.options.length ? t("orders.table.no_options") : t("orders.table.select")
+            }
+          </div>
+        ) : children
+      }
+    </td>
+  );
 };
 
 export default EditableCell;

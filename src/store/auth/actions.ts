@@ -51,7 +51,7 @@ export const loginUserThunk = (data: LoginData, commonAuth?: AuthUserData) =>
         try {
           let userData = await authAPI.getUser(auth.Authorization);
           if (auth && userData) {
-            localStorage.setItem(localStorageRoleKey, userData.role);
+            localStorage.setItem(localStorageRoleKey, userData.role ?? "");
             dispatch(_setAuthUserData({...auth, ...userData}));
             return true;
           }

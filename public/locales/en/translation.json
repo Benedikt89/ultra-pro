@@ -44,7 +44,9 @@
         "paint": "Paint",
         "backTexture": "backTexture",
         "color": "Color",
-        "areaFacade": "Радіальний фасад"
+        "areaFacade": "Радіальний фасад",
+        "index": "№",
+        "operation": "Дії"
       }
     },
     "order_number": {
@@ -83,6 +85,11 @@
     "image_title": "Остаточний вид деталі зі всіма доданими модифікаціями і бічними видами",
     "add_mod": "Add modification",
     "modal_title": "Вікно додавання модифікації",
+    "height": "Висота",
+    "width": "Ширина",
+    "radius": "Радіус",
+    "offsetX": "Зміщення по X",
+    "offsetY": "Зміщення по Y",
     "go_back": "Відмінити",
     "add": "Додати"
   },

@@ -1,5 +1,5 @@
 export const columnTypes = [
-  'type', 'height', 'width', 'quantity', 'thick', 'rollName', 'model', 'frontTexture', 'paint',
+  'index', 'type', 'height', 'width', 'quantity', 'thick', 'rollName', 'model', 'frontTexture', 'paint',
   'backTexture', 'color', 'areaFacade'
 ] as const;
 

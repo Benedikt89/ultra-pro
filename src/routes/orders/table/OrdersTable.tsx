@@ -7,8 +7,6 @@ import {ColumnType, columnTypes} from "types/orders-types";
 import {AppStateType} from "store/store";
 import {onAddRow} from "store/orders/actions";
 import {selectFetchingByKey} from "store/app/selectors";
-import {setModal} from "store/app/actions";
-import {MODAL} from "types/app-types";
 
 import EditableCell from "./EditableCell";
 import OperationsCell from "./OperationsCell";
@@ -25,10 +23,11 @@ type ColumnItemType = {
   sorter?: any
   key?: string
   fixed?: 'right'
-  onCell?: (record: {id: string, key: string}) => {
+  onCell?: (record: {id: string, key: string, i: number}) => {
     record_id: string,
     dataIndex: ColumnType,
     title: string,
+    i: number,
   }
 };
 
@@ -38,14 +37,15 @@ const generateColumns = (t: TFunction): ColumnItemType[] => {
       title: t(`orders.table.header.${value}`),
       _columnType: value as ColumnType,
       dataIndex: value as ColumnType,
-      editable: true,
-      width: 200,
+      editable: value !== 'index',
+      width: value === 'index' ? 50 : 200,
       _contentType: value === "width" || value === "quantity" || value === "height" ? "number" : "select",
-      onCell: (record: {id: string, key: string}) => ({
+      onCell: (record: {id: string, key: string, i: number}) => ({
         record_id: record.id,
         dataIndex: value as ColumnType,
         _columnType: value as ColumnType,
         title: value as string,
+        i: record.i,
       }),
     };
     return res;
@@ -66,7 +66,7 @@ const OrdersTable:React.FC = () => {
     return [
       ...generateColumns(t),
       {
-        title: 'operation',
+        title: t('orders.table.header.operation'),
         dataIndex: 'operation',
         _columnType: columnTypes[0],
         key: 'operation',
@@ -92,7 +92,7 @@ const OrdersTable:React.FC = () => {
         components={components}
         rowClassName={() => 'editable-row'}
         bordered
-        dataSource={ids.map(id => ({id, key: id}))}
+        dataSource={ids.map((id, i) => ({id, key: id, i}))}
         columns={columns}
         scroll={{x: 1600}}
       />
@@ -100,7 +100,7 @@ const OrdersTable:React.FC = () => {
         <Button onClick={handleAdd} type="primary" loading={loading}>
           {t("orders.table.add")}
         </Button>
-        <Button type="primary" onClick={() => dispatch(setModal(MODAL.MODIFICATION, "modal_title"))}>
+        <Button type="primary" disabled={true}>
           {t("orders.table.textures")}
         </Button>
       </div>

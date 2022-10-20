@@ -14,7 +14,7 @@ i18n
   .use(initReactI18next)
   .init({
     debug: process.env.NODE_ENV !== 'production',
-    fallbackLng: ["en", "uk"],
+    fallbackLng: ["uk"],
     lng: 'uk',
     supportedLngs: Array.from(LANGUAGES.keys()),
 

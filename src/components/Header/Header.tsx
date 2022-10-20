@@ -29,12 +29,14 @@ const Header: React.FC<Props> = ({}) => {
     <PageHeader
       className="site-page-header-responsive"
       title={<>
-        <img src={logo} alt="logo" className="header-logo"/>
-        <Button className="header-icon-button" icon={<img src={headphones} alt="logo"/>}/>
+        <Link to='/orders'>
+          <img src={logo} alt="logo" className="header-logo"/>
+        </Link>
+        <Button className="header-icon-button" icon={<img src={headphones} alt="logo"/>} disabled />
         <Link to='/modifications'>
           <Button className="header-icon-button" icon={<img src={circul} alt="logo"/>}/>
         </Link>
-        <Button className="header-icon-button" icon={<img src={info} alt="logo"/>}/>
+        <Button className="header-icon-button" icon={<img src={info} alt="logo"/>} disabled />
       </>}
       extra={[
         <Link to='/orders' key="2">
