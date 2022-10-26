@@ -8,6 +8,7 @@ import {selectRowCell} from "store/orders/selectors";
 import {ColumnType} from "types/orders-types";
 import {onOptionSelect} from "store/orders/actions";
 import {selectFetchingByKey} from "store/app/selectors";
+import {Input} from "antd";
 
 interface EditableCellProps {
   children: React.ReactNode;
@@ -16,6 +17,8 @@ interface EditableCellProps {
   record_id: string;
   i: number;
 }
+
+const numberCells = ["width", "quantity", "height", "thick"];
 
 const EditableCell: React.FC<EditableCellProps> = ({
                                                      children,
@@ -42,7 +45,7 @@ const EditableCell: React.FC<EditableCellProps> = ({
     setEditing(!editing);
   };
 
-  const onChange = useCallback((value: string) => {
+  const onChange = useCallback((value: any) => {
     const option = cellData?.options.find(opt => opt.id === value);
     if (option) {
       dispatch(onOptionSelect(record_id, option, _columnType))
@@ -62,7 +65,9 @@ const EditableCell: React.FC<EditableCellProps> = ({
       {
         _columnType === "index" ? (
           <div className="editable-cell-value-wrap">{i + 1}</div>
-        ) : cellData && !cellData.disabled ? (
+        ) : numberCells.includes(_columnType) ? (
+          <Input type="number" onChange={onChange} onBlur={handleBlur} />
+        ) : cellData && !cellData.disabled ?(
           <DropdownSelect
             minWidth={160}
             onChange={onChange}

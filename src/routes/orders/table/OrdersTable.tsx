@@ -94,7 +94,7 @@ const OrdersTable:React.FC = () => {
         bordered
         dataSource={ids.map((id, i) => ({id, key: id, i}))}
         columns={columns}
-        scroll={{x: 1600}}
+        scroll={{ x: 'calc(700px + 50%)', y: 240 }}
       />
       <div className="row between">
         <Button onClick={handleAdd} type="primary" loading={loading}>

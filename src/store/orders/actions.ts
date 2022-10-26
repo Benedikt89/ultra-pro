@@ -1,7 +1,7 @@
 import {ThunkDispatch} from "redux-thunk";
 
 import {fetchHandler} from "utils/fetchWrapper";
-import {ColumnType, columnTypes, Option} from "types/orders-types";
+import {columnFetchTypes, ColumnType, Option} from "types/orders-types";
 import {AppActionsType, GetStateType} from "store/store";
 
 import {ordersAPI} from "./api";
@@ -93,9 +93,14 @@ export const onOptionSelect = (row_id: string, option: Option, columnType: Colum
     async (dispatch: ThunkDispatch<{}, {}, AppActionsType>, getState: GetStateType) => {
       const userData = getState().auth.userData;
       if (userData) {
-        const nextIdx = columnTypes.indexOf(columnType) + 1;
-        const nextType = columnTypes[nextIdx];
-        const options = await ordersAPI.getOptions(nextType);
+        const nextIdx = columnFetchTypes.indexOf(columnType) + 1;
+        let nextType: ColumnType = columnFetchTypes[nextIdx] as ColumnType;
+        let options = await ordersAPI.getOptions(nextType);
+        if (!options.length) {
+          const nextIdx2 = columnFetchTypes.indexOf(nextType) + 1;
+          nextType = columnFetchTypes[nextIdx2] as ColumnType;
+          options = await ordersAPI.getOptions(nextType);
+        }
 
         dispatch(_onSelectSuccess({row_id, value: option, columnType, options, nextType}));
         return true;

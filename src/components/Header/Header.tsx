@@ -13,6 +13,7 @@ import info from "assets/images/icons/info.svg";
 import exit from "assets/images/icons/exit.svg";
 
 import './Header.less';
+import {useLocation} from "react-router";
 
 interface Props {
 }
@@ -24,6 +25,26 @@ const Header: React.FC<Props> = ({}) => {
   const logOutHandler = useCallback(() => {
     dispatch(logOut())
   }, []);
+
+  const { pathname } = useLocation();
+
+  const extra = [
+    <Button
+      key="3" className="logout-button" onClick={logOutHandler}
+      icon={<img src={exit} alt="logo"/>}
+    >
+      {t('header.logout')}
+    </Button>
+  ];
+  if (pathname !== '/orders') {
+    extra.unshift(
+      <Link to='/orders' key="2">
+        <Button type="text">
+          {t('header.orders_constructor')}
+        </Button>
+      </Link>
+    )
+  }
 
   return (
     <PageHeader
@@ -38,19 +59,7 @@ const Header: React.FC<Props> = ({}) => {
         </Link>
         <Button className="header-icon-button" icon={<img src={info} alt="logo"/>} disabled />
       </>}
-      extra={[
-        <Link to='/orders' key="2">
-          <Button type="text">
-            {t('header.orders_constructor')}
-          </Button>
-        </Link>,
-        <Button
-          key="3" className="logout-button" onClick={logOutHandler}
-          icon={<img src={exit} alt="logo"/>}
-        >
-          {t('header.logout')}
-        </Button>,
-      ]}
+      extra={extra}
     />
   )
 };

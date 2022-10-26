@@ -21,3 +21,12 @@ export const ordersAPI = {
     return getOptions(title, fixed);
   },
 }
+
+// TODO:
+// height, width, quantity => inputs number
+
+// selected point, align in mm
+
+// mods require corner -> side and corner ->
+
+// based on type, align depends on selected corner, as point zero, x/y only positive params from selected point

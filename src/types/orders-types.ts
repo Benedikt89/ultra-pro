@@ -1,3 +1,5 @@
+export const columnFetchTypes = ['rollName', 'model', 'frontTexture', 'paint', 'backTexture', 'color', 'areaFacade'];
+
 export const columnTypes = [
   'index', 'type', 'height', 'width', 'quantity', 'thick', 'rollName', 'model', 'frontTexture', 'paint',
   'backTexture', 'color', 'areaFacade'
