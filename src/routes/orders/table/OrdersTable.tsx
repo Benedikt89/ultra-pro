@@ -86,8 +86,9 @@ const OrdersTable:React.FC = () => {
   };
 
   return (
-    <div className="w-full">
+    <div className="col between w-full h-full">
       <Table
+        className={!ids.length ? "mb-2" : undefined}
         components={components}
         rowClassName={() => 'editable-row'}
         bordered

@@ -109,7 +109,7 @@ const Main: React.FC<MainProps> = ({
                   <Route path="" element={<OrdersPage />} />
                 </Route>
 
-                <Route path="/modifications" element={<ProtectedRoute routeKey='modifications' />}>
+                <Route path="/modifications/:orderId" element={<ProtectedRoute routeKey='modifications' />}>
                   <Route path="" element={<Modifications />} />
                 </Route>
 

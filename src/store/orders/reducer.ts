@@ -11,7 +11,14 @@ const initialState: OrdersState = {
 const ordersReducer = (state: OrdersState = initialState, action: AppActionsType): OrdersState => {
   switch (action.type) {
     case ordersTypes.ADD_ROW: {
-      const newOne: DataRow = {id: Math.random() + "row_id", type: { options: action.options, selected: null }};
+      const newOne: DataRow = {
+        id: Math.random() + "row_id",
+        type: { options: action.options, selected: null },
+        modifications: {
+          ids: [],
+          data: {}
+        }
+      };
       return {
         ...state,
         rows: {...state.rows, [newOne.id]: newOne},
@@ -37,6 +44,14 @@ const ordersReducer = (state: OrdersState = initialState, action: AppActionsType
       return {
         ...newState,
         ids: newState.ids.filter(id => id !== action.id)
+      };
+    }
+    case ordersTypes.SET_MODIFICATIONS: {
+      const found = state.rows[action.id];
+      if (!found) return state;
+      return {
+        ...state,
+        rows: {...state.rows, [found.id]: {...found, modifications: action.modifications}},
       };
     }
     case ordersTypes.ON_SELECT: {

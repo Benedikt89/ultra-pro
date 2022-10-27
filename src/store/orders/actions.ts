@@ -5,15 +5,17 @@ import {columnFetchTypes, ColumnType, Option} from "types/orders-types";
 import {AppActionsType, GetStateType} from "store/store";
 
 import {ordersAPI} from "./api";
+import {ModificationEntity} from "../../types/mods-types";
 
 export const ordersTypes = {
   ADD_ROW: 'orders/ADD_ROW',
   REMOVE_ROW: 'orders/REMOVE_ROW',
   DUPLICATE_ROW: 'orders/DUPLICATE_ROW',
   ON_SELECT: 'orders/ON_SELECT',
+  SET_MODIFICATIONS: 'orders/SET_MODIFICATIONS',
 } as const;
 
-export type OrdersActions = AddRow | RemoveRow | OnSelect | DuplicateRow;
+export type OrdersActions = AddRow | RemoveRow | OnSelect | DuplicateRow | SetOrderModifications;
 
 // ========================================= Actions interfaces ============================================= //
 interface AddRow {
@@ -39,6 +41,12 @@ interface OnSelectPayload {
   options: Option[]
 }
 
+interface SetOrderModifications {
+  type: typeof ordersTypes.SET_MODIFICATIONS,
+  id: string,
+  modifications: ModificationEntity
+}
+
 interface OnSelect extends OnSelectPayload {
   type: typeof ordersTypes.ON_SELECT,
 }
@@ -55,6 +63,10 @@ export const _removeRow = (id: string): RemoveRow =>
 
 export const _onSelectSuccess = (payload: OnSelectPayload): OnSelect => {
   return ({type: ordersTypes.ON_SELECT, ...payload});
+};
+
+export const _onSetOrderModifications = (id: string, modifications: ModificationEntity): SetOrderModifications => {
+  return ({type: ordersTypes.SET_MODIFICATIONS, id, modifications});
 };
 
 // ========================================= EXTERNAL ACTIONS ============================================= //
@@ -103,6 +115,21 @@ export const onOptionSelect = (row_id: string, option: Option, columnType: Colum
         }
 
         dispatch(_onSelectSuccess({row_id, value: option, columnType, options, nextType}));
+        return true;
+      }
+    }
+  );
+
+// set selected state, and request new options
+export const onSaveModifications = (row_id: string) =>
+  fetchHandler(
+    'onSaveModifications' + row_id,
+    async (dispatch: ThunkDispatch<{}, {}, AppActionsType>, getState: GetStateType) => {
+      const userData = getState().auth.userData;
+      if (userData) {
+        const {data, ids} = getState().mods;
+
+        dispatch(_onSetOrderModifications(row_id, {data, ids}));
         return true;
       }
     }

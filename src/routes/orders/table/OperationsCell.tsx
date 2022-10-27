@@ -19,7 +19,7 @@ const OperationsCell: React.FC<Props> = React.memo(({record_id}) => {
 
   return (
     <div className="row around">
-      <Link to='/modifications'>
+      <Link to={`/modifications/${record_id}`}>
         <Button style={{marginRight: "5px"}} icon={<EditOutlined />} />
       </Link>
       <Button style={{marginRight: "5px"}} icon={<CopyOutlined />} onClick={handleDuplicate}/>

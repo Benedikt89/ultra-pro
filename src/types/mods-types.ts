@@ -22,8 +22,12 @@ export interface Modification {
   data: ModificationData
 }
 
-export interface ModificationsState {
+
+export interface ModificationEntity {
   data: {[key: string]: Modification}
   ids: string[]
-  editingId: string | null
+}
+
+export interface ModificationsState extends ModificationEntity{
+    editingId: string | null
 }

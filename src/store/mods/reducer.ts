@@ -23,6 +23,12 @@ export const modDefaults: ModificationData = {
 
 const modsReducer = (state: ModificationsState = initialState, action: AppActionsType): ModificationsState => {
   switch (action.type) {
+    case modsActionTypes.SET_STATE: {
+      return {
+        ...action.state,
+        editingId: null
+      }
+    }
     case modsActionTypes.ADD_MODIFICATION: {
       const newOne = {id: Math.random() + "mod_id", value: null, data: modDefaults};
       return {

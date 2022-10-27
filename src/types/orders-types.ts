@@ -1,3 +1,5 @@
+import {ModificationEntity} from "./mods-types";
+
 export const columnFetchTypes = ['rollName', 'model', 'frontTexture', 'paint', 'backTexture', 'color', 'areaFacade'];
 
 export const columnTypes = [
@@ -11,6 +13,7 @@ export type DefaultRowValues = {
   id: string
   _isEditing?: boolean
   loading?: boolean
+  modifications: ModificationEntity
 }
 
 export type Option = {id: string, title: string}
