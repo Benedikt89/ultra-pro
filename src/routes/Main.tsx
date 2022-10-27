@@ -12,7 +12,7 @@ import ProtectedRoute from "Hoc/ProtectedRoute";
 import {AuthUserData, LoginData} from "types/auth-types";
 import {MODAL, ModalType, ModalTypes} from "types/app-types";
 import {setModal} from "store/app/actions";
-import uiVersion from 'GitInfo.json'
+import uiVersion from 'GitInfo.json';
 import Header from "components/Header/Header";
 import LoadingPage from "components/common/LoadingPage";
 
@@ -95,32 +95,33 @@ const Main: React.FC<MainProps> = ({
         {isAuth && <Header />}
         {isFetching || !state.requested ?
           <LoadingPage/>
-          :
-          <div className={"contentWrapper"}>
-            <Routes>
-              <Route path="/" element={<LoadingPage/>}/>
-              <Route path="/login" element={<LoginPage/>}/>
+          : (
+            <div className={"contentWrapper"}>
+              <Routes>
+                <Route path="/" element={<LoadingPage/>}/>
+                <Route path="/login" element={<LoginPage/>}/>
 
-              <Route path="/profile" element={<ProtectedRoute routeKey='profile' />}>
-                <Route path="" element={<ProfilePage/>} />
-              </Route>
+                <Route path="/profile" element={<ProtectedRoute routeKey='profile' />}>
+                  <Route path="" element={<ProfilePage/>} />
+                </Route>
 
-              <Route path="/orders" element={<ProtectedRoute routeKey='orders' />}>
-                <Route path="" element={<OrdersPage />} />
-              </Route>
+                <Route path="/orders" element={<ProtectedRoute routeKey='orders' />}>
+                  <Route path="" element={<OrdersPage />} />
+                </Route>
 
-              <Route path="/modifications" element={<ProtectedRoute routeKey='modifications' />}>
-                <Route path="" element={<Modifications />} />
-              </Route>
+                <Route path="/modifications" element={<ProtectedRoute routeKey='modifications' />}>
+                  <Route path="" element={<Modifications />} />
+                </Route>
 
-              <Route path="*" element={<Result
-                status="404"
-                title={t("error.404.title")}
-                subTitle={t("error.404.subtitle")}
-                extra={<Button type="primary">{t("error.go_back")}</Button>}
-              />}/>
-            </Routes>
-          </div>
+                <Route path="*" element={<Result
+                  status="404"
+                  title={t("error.404.title")}
+                  subTitle={t("error.404.subtitle")}
+                  extra={<Button type="primary">{t("error.go_back")}</Button>}
+                />}/>
+              </Routes>
+            </div>
+          )
         }
         <span className="ui-version">v.{uiVersion.gitCommitHash}</span>
       </main>

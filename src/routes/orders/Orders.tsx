@@ -47,7 +47,7 @@ const OrdersPage: React.FC = () => {
                 placeholder={t("orders.series.placeholder")}
               />
             </div>
-            <div>
+            <div style={{minWidth: "300px"}}>
               <Alert
                 message="Важливо!"
                 description="Даний товар обміну і поверненню не підлягає!"

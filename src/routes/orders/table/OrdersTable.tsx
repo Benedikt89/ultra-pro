@@ -88,13 +88,12 @@ const OrdersTable:React.FC = () => {
   return (
     <div className="w-full">
       <Table
-        className="mb-2"
         components={components}
         rowClassName={() => 'editable-row'}
         bordered
         dataSource={ids.map((id, i) => ({id, key: id, i}))}
         columns={columns}
-        scroll={{ x: 'calc(700px + 50%)', y: 240 }}
+        scroll={{ x: 'calc(700px + 50%)', y: 'calc(100vh - 668px)' }}
       />
       <div className="row between">
         <Button onClick={handleAdd} type="primary" loading={loading}>
