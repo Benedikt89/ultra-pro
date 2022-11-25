@@ -3,10 +3,11 @@ import Keys from '../appKeys';
 export type APIMethods = 'create' | 'edit' | 'delete' | 'read' | 'connect' | 'password-reset' | 'update' | 'add'
 
 export const apiEndpoints = (method: APIMethods) => {
-  const baseUrl = Keys.REACT_APP_BASE_URL || 'http://qmate20-env.eba-szndgiw3.eu-central-1.elasticbeanstalk.com';
+  const baseUrl = Keys.REACT_APP_BASE_URL;
 
   const apiEndpoints = (method: APIMethods) =>  ({
     auth: {
+      me: `${baseUrl}/users/me/`,
       login: `${baseUrl}/auth/login`,
       changePassword: `${baseUrl}/queue-config/profile/change/password`,
       readProfile: `${baseUrl}/queue-config/profile/read`,
@@ -15,6 +16,7 @@ export const apiEndpoints = (method: APIMethods) => {
   })
   const apiEndpointsV2 = (method: APIMethods) =>  ({
     auth: {
+      me: `${baseUrl}/users/me/`,
       login: `${baseUrl}/auth/login`,
       changePassword: `${baseUrl}/queue-config/profile/change/password`,
       readProfile: `${baseUrl}/queue-config/profile/read`,

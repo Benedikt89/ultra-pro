@@ -16,15 +16,15 @@ const fakeRequest = (v = { data: {}}): Promise<{data: {}}> => {
 
 export const authAPI = {
   async loginUser(data: LoginData): Promise<AuthToFrontUserData | never | any> {
-    // const res: AxiosResponse = await axios({
-    //   url: apiEndpoints('create').auth.login,
-    //   method: 'POST',
-    //   headers: {
-    //     ['Content-Type']: 'application/json'
-    //   },
-    //   data: JSON.stringify(data)
-    // });
-    const res = await fakeRequest();
+    const res: AxiosResponse = await axios({
+      url: apiEndpoints('create').auth.login,
+      method: 'POST',
+      headers: {
+        ['Content-Type']: 'application/json'
+      },
+      data: JSON.stringify(data)
+    });
+    // const res = await fakeRequest();
     return res.data;
   },
   async getUser(auth: string) {
