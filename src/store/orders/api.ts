@@ -1,4 +1,4 @@
-import {Option} from "../../types/orders-types";
+import {Option} from "@Types/orders-types";
 
 const getOption = (i: number = 0, title?: string): Option => ({
   id: Math.random() + "opt_id",

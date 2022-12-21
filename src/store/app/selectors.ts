@@ -1,4 +1,4 @@
-import {AppStateType} from "store/store";
+import {AppStateType} from "@Store/store";
 
 export const selectFetchingByKey = (state: AppStateType, key: string): boolean =>
   !!state.app.isFetching[key];

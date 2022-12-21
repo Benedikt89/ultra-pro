@@ -2,12 +2,12 @@ import React, {useCallback, useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
 
-import DropdownSelect from "components/forms/DropdownSelect";
-import {AppStateType} from "store/store";
-import {selectRowCell} from "store/orders/selectors";
-import {ColumnType} from "types/orders-types";
-import {onOptionSelect} from "store/orders/actions";
-import {selectFetchingByKey} from "store/app/selectors";
+import DropdownSelect from "@Components/forms/DropdownSelect";
+import {AppStateType} from "@Store/store";
+import {selectRowCell} from "@Store/orders/selectors";
+import {ColumnType} from "@Types/orders-types";
+import {onOptionSelect} from "@Store/orders/actions";
+import {selectFetchingByKey} from "@Store/app/selectors";
 import {Input} from "antd";
 
 interface EditableCellProps {
@@ -48,6 +48,7 @@ const EditableCell: React.FC<EditableCellProps> = ({
   const onChange = useCallback((value: any) => {
     const option = cellData?.options.find(opt => opt.id === value);
     if (option) {
+      // @ts-ignore
       dispatch(onOptionSelect(record_id, option, _columnType))
     }
   }, [record_id, _columnType, cellData]);

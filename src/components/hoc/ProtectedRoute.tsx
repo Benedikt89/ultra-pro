@@ -2,15 +2,15 @@ import * as React from 'react';
 import {connect} from 'react-redux';
 import {Navigate, RouteProps, Outlet } from 'react-router';
 
-import {selectIsAuth} from "store/auth/selectors";
-import {AppStateType} from "store/store";
-import {RolesType} from "types/auth-types";
+import {selectIsAuth} from "@Store/auth/selectors";
+import {AppStateType} from "@Store/store";
+import {RolesType} from "@Types/auth-types";
 
-interface PrivateRouteProps extends RouteProps {
+type PrivateRouteProps = {
   isAuth: boolean;
   role: RolesType | null,
   routeKey: string
-}
+} & RouteProps
 
 const ProtectedRoute = (props: PrivateRouteProps) => {
   const { isAuth} = props; //, routeKey, role } = props;
@@ -21,6 +21,7 @@ const ProtectedRoute = (props: PrivateRouteProps) => {
     return <Navigate to={'/profile'} />
   }
   if (!isAuth) {
+    console.log("ProtectedRoute ===>>")
     return <Navigate
       to={{
         pathname: '/login'
@@ -34,7 +35,7 @@ const ProtectedRoute = (props: PrivateRouteProps) => {
 
 const mapStateToProps = (state: AppStateType) => ({
   isAuth: selectIsAuth(state),
-  role: state.auth.userData.role
+  role: state.auth.userData?.role
 });
 
 export default connect(mapStateToProps, {})(ProtectedRoute);

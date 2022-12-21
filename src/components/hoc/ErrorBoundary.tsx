@@ -1,5 +1,5 @@
 import React from 'react';
-import {componentErrorLogger} from "../utils/errorLogger";
+import {componentErrorLogger} from "@Utils/errorLogger";
 
 
 const MISSING_ERROR = 'Error was swallowed during propagation.';
@@ -38,6 +38,7 @@ export const withErrorBoundary = <BaseProps extends {}>(
         };
 
         render() {
+            // @ts-ignore
             const {children, ...restProps} = this.props;
             const {error} = this.state;
 

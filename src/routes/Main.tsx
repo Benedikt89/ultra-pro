@@ -1,99 +1,74 @@
 import React, {useEffect, useState} from 'react';
-import {Route, Routes, useLocation, useNavigate} from "react-router";
-import {Button, Modal, Result} from "antd";
-import {connect} from "react-redux";
-import {useTranslation} from "react-i18next";
+import {Route, Routes, useNavigate} from "react-router";
+import {ConfigProvider} from "antd";
+import {useSelector} from "react-redux";
 
-import {AppStateType} from "store/store";
-import {selectIsAuth} from "store/auth/selectors";
-import {selectErrorByKey, selectFetchingByKey} from "store/app/selectors";
-import {_setAuthUserData, localStorageKey, loginUserThunk} from "store/auth/actions";
-import ProtectedRoute from "Hoc/ProtectedRoute";
-import {AuthUserData, LoginData} from "types/auth-types";
-import {MODAL, ModalType, ModalTypes} from "types/app-types";
-import {setModal} from "store/app/actions";
-import uiVersion from 'GitInfo.json';
-import Header from "components/Header/Header";
-import LoadingPage from "components/common/LoadingPage";
+import {AppStateType, useAppDispatch} from "@Store/store";
+import {selectIsAuth} from "@Store/auth/selectors";
+import {selectErrorByKey, selectFetchingByKey} from "@Store/app/selectors";
+import {checkAuth} from "@Store/auth/actions";
+import uiVersion from '../GitInfo.json';
+import Header from "@Components/Header/Header";
+import LoadingPage from "@Components/common/LoadingPage";
+import ProtectedRoute from "@Components/hoc/ProtectedRoute";
+import useEffectOnce from "@Utils/hooks/useEffectOnce";
+import ProfilePage from "@Routes/profile/ProfilePage";
+import ErrorPage from "@Routes/error/ErrorPage";
+import ModalWrapper from "@Routes/modal/ModalWrapper";
+import {localStorageTokenKey} from "@Utils/api/api";
 
-import useEffectOnce from "utils/hooks/useEffectOnce";
 import OrdersPage from "./orders/Orders";
 import Modifications from "./modifications/Modifications";
-import ProfilePage from "./profile/ProfilePage";
 import LoginPage from "./login/LoginPage";
 
 import './Main.less';
-import ModificationModal from "./modifications/modal/ModificationModal";
 
-interface Props {}
-
-interface ConnectedProps {
-  modal: ModalType | null
-  isAuth: boolean | null
-  appError: { message: string } | null
-  isFetching: boolean
-}
-
-interface DispatchedProps {
-  setModal: (type: null | ModalTypes, message: string | null) => void
-  _setAuthUserData: (payload: AuthUserData) => void
-  loginUserThunk: (data: LoginData, commonAuth?: AuthUserData) => void
-}
-
-interface MainProps extends Props, ConnectedProps, DispatchedProps {
-}
-
-interface MainState {
-  requested: boolean
-  prevUrl: string
-}
-
-const Main: React.FC<MainProps> = ({
-                                     isFetching,
-                                     isAuth,
-                                     modal,
-                                     setModal,
-                                     _setAuthUserData,
-                                     loginUserThunk,
-                                   }) => {
-  const {t} = useTranslation();
+const Main: React.FC = () => {
   const navigate = useNavigate();
-  const { pathname } = useLocation();
-  const [state, setState] = useState<MainState>({
-    requested: false,
-    prevUrl: ''
-  })
+  const dispatch = useAppDispatch();
+  const {
+    isAuth,
+    appError,
+    isFetching,
+  } = useSelector((state: AppStateType) => ({
+    isAuth: selectIsAuth(state),
+    appError: selectErrorByKey(state, 'checkAuth'),
+    isFetching: selectFetchingByKey(state, 'checkAuth'),
+  }));
+  const [requested, setRequested] = useState<string | null>(null);
+
 
   useEffectOnce(() => {
-    let path = pathname;
-    if (path && path !== '/login' && path !== '/') {
-      setState(prev => ({...prev, prevUrl: path}));
+    const isToken = localStorage.getItem(localStorageTokenKey);
+    if (!!isToken) {
+      dispatch(checkAuth()).finally(() => setRequested("done"));
     }
-    let localData = localStorage.getItem(localStorageKey);
-    if (localData) {
-      try {
-        let auth: AuthUserData = JSON.parse(localData);
-        if (auth && auth.Authorization) {
-          _setAuthUserData(auth);
-          loginUserThunk({login: '', password: ''}, auth);
-        }
-      } catch (e) {
-        console.log(e);
-      }
-    }
-    setState(prev => ({...prev,requested: true}));
+    setRequested(isToken ? "requested" : "not");
   })
 
   useEffect(() => {
-    let url = !isAuth ? '/login' : state.prevUrl ? state.prevUrl : '/orders';
+    if (!requested || requested === "requested") return;
+    let url = !isAuth ? '/login' : '/orders';
     navigate(url);
-  }, [isAuth])
+  }, [requested, isAuth]);
+
+  useEffect(() => {
+    if (!appError) return;
+    navigate('/login');
+  }, [appError]);
 
   return (
-    <div className={"mainWrapper"}>
-      <main>
-        {isAuth && <Header />}
-        {isFetching || !state.requested ?
+    <ConfigProvider
+      theme={{
+        token: {
+          colorPrimary: '#5070B1',
+          borderRadius: 2
+        },
+      }}
+    >
+      <main className={"mainWrapper"}>
+        {isAuth && <Header/>}
+        {isFetching || requested !== "done" ?
           <LoadingPage/>
           : (
             <div className={"contentWrapper"}>
@@ -101,69 +76,28 @@ const Main: React.FC<MainProps> = ({
                 <Route path="/" element={<LoadingPage/>}/>
                 <Route path="/login" element={<LoginPage/>}/>
 
-                <Route path="/profile" element={<ProtectedRoute routeKey='profile' />}>
-                  <Route path="" element={<ProfilePage/>} />
+                <Route path="/profile" element={<ProtectedRoute routeKey='profile'/>}>
+                  <Route path="" element={<ProfilePage/>}/>
                 </Route>
 
-                <Route path="/orders" element={<ProtectedRoute routeKey='orders' />}>
-                  <Route path="" element={<OrdersPage />} />
+                <Route path="/orders" element={<ProtectedRoute routeKey='orders'/>}>
+                  <Route path="" element={<OrdersPage/>}/>
                 </Route>
 
-                <Route path="/modifications/:orderId" element={<ProtectedRoute routeKey='modifications' />}>
-                  <Route path="" element={<Modifications />} />
+                <Route path="/modifications/:orderId" element={<ProtectedRoute routeKey='modifications'/>}>
+                  <Route path="" element={<Modifications/>}/>
                 </Route>
 
-                <Route path="*" element={<Result
-                  status="404"
-                  title={t("error.404.title")}
-                  subTitle={t("error.404.subtitle")}
-                  extra={<Button type="primary">{t("error.go_back")}</Button>}
-                />}/>
+                <Route path="*" element={<ErrorPage />}/>
               </Routes>
             </div>
           )
         }
-        <span className="ui-version">v.{uiVersion.gitCommitHash}</span>
+        <ModalWrapper />
       </main>
-      <Modal
-        title={modal && t(modal.title)}
-        centered
-        width={modal?.type === MODAL.MODIFICATION ? 800 : undefined}
-        confirmLoading={false}
-        forceRender={true}
-        visible={!!modal}
-        footer={(modal && modal?.type !== MODAL.MODIFICATION) && [
-          <Button key="back" onClick={() => setModal(null, null)}>
-            {t(`${modal?.type ?? ""}.go_back`)}
-          </Button>
-        ]}
-        onCancel={() => setModal(null, null)}
-      >
-        {!modal ? null : modal?.type === MODAL.MODIFICATION ? (
-          <ModificationModal />
-        ) : (
-          <Result
-            status={modal.type}
-            title={t(modal.type)}
-            subTitle={t(modal.message)}
-          />
-        )}
-      </Modal>
-    </div>
+      <span className="ui-version">v.{uiVersion.gitCommitHash}</span>
+    </ConfigProvider>
   );
 }
 
-const mapStateToProps = (state: AppStateType): ConnectedProps => {
-  return {
-    modal: state.app.modal,
-    isAuth: selectIsAuth(state),
-    appError: selectErrorByKey(state, 'loginUser'),
-    isFetching: selectFetchingByKey(state, 'loginUser'),
-  }
-};
-
-let ComposedComponent = connect(
-  mapStateToProps, {_setAuthUserData, loginUserThunk, setModal}
-)(Main);
-
-export default ComposedComponent;
+export default Main;

@@ -1,5 +1,5 @@
-import {columnTypes, DataRow, OrdersState} from "types/orders-types";
-import {AppActionsType} from "store/store";
+import {columnTypes, DataRow, OrdersState} from "@Types/orders-types";
+import {AppActionsType} from "@Store/store";
 
 import {ordersTypes} from "./actions";
 

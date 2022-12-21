@@ -3,11 +3,11 @@ import {Button} from "antd";
 import {DeleteOutlined} from "@ant-design/icons";
 import {useDispatch, useSelector} from "react-redux";
 
-import {AppStateType} from "store/store";
-import {selectModById} from "store/mods/selectors";
-import {deleteModification, setEditModification} from "store/mods/actions";
-import {setModal} from "store/app/actions";
-import {MODAL} from "types/app-types";
+import {AppStateType} from "@Store/store";
+import {selectModById} from "@Store/mods/selectors";
+import {deleteModification, setEditModification} from "@Store/mods/actions";
+import {setModal} from "@Store/app/actions";
+import {MODAL} from "@Types/app-types";
 
 interface Props {
   id: string;

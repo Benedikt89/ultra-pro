@@ -1,11 +1,11 @@
 import React, {useCallback} from "react";
 import {Button, Popconfirm} from "antd";
 import {DeleteOutlined, EditOutlined, CopyOutlined, SaveOutlined} from "@ant-design/icons";
-import {useDispatch} from "react-redux";
 import {useTranslation} from "react-i18next";
 
-import {_removeRow, onDuplicateRow} from "store/orders/actions";
+import {_removeRow, onDuplicateRow} from "@Store/orders/actions";
 import {Link} from "react-router-dom";
+import {useAppDispatch} from "@Store/store";
 
 interface Props {
   record_id: string;
@@ -13,8 +13,9 @@ interface Props {
 
 const OperationsCell: React.FC<Props> = React.memo(({record_id}) => {
   const {t} = useTranslation();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const handleDelete = useCallback(() => dispatch(_removeRow(record_id)), [record_id]);
+  // @ts-ignore
   const handleDuplicate = useCallback(() => dispatch(onDuplicateRow(record_id)), [record_id]);
 
   return (

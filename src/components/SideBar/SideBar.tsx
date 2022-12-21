@@ -5,10 +5,10 @@ import {Menu} from 'antd';
 import {useTranslation} from "react-i18next";
 import {useSelector} from "react-redux";
 
-import {I_navigationItem, navigationOptions} from "constants/navigation";
-import LogoWhite from "assets/images/LogoWhite.svg";
-import {AppStateType} from "store/store";
-import {selectCompanyLogo} from "store/app/selectors";
+
+import {AppStateType} from "@Store/store";
+import {selectCompanyLogo} from "@Store/app/selectors";
+import {I_navigationItem, navigationOptions} from "@Utils/navigation";
 
 import './SideBar.css';
 
@@ -53,7 +53,7 @@ const SideBar: React.FC = () => {
         mode="inline"
       >
         <Link to="/">
-          <img alt="Logo" src={companyLogo ? companyLogo : LogoWhite} className="nav-bar-logo"/>
+          <img alt="Logo" src={companyLogo ? companyLogo : ""} className="nav-bar-logo"/>
         </Link>
         {navigationOptions.map((opt: I_navigationItem) => opt.expandable
           ? (<SubMenu

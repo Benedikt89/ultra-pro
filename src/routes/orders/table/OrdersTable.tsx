@@ -1,12 +1,12 @@
 import React, {useCallback, useMemo} from "react";
 import {Button, Table} from "antd";
-import {useDispatch, useSelector} from "react-redux";
-import {TFunction, useTranslation} from "react-i18next";
+import {useSelector} from "react-redux";
+import {useTranslation} from "react-i18next";
 
-import {ColumnType, columnTypes} from "types/orders-types";
-import {AppStateType} from "store/store";
-import {onAddRow} from "store/orders/actions";
-import {selectFetchingByKey} from "store/app/selectors";
+import {ColumnType, columnTypes} from "@Types/orders-types";
+import {AppStateType, useAppDispatch} from "@Store/store";
+import {onAddRow} from "@Store/orders/actions";
+import {selectFetchingByKey} from "@Store/app/selectors";
 
 import EditableCell from "./EditableCell";
 import OperationsCell from "./OperationsCell";
@@ -31,7 +31,7 @@ type ColumnItemType = {
   }
 };
 
-const generateColumns = (t: TFunction): ColumnItemType[] => {
+const generateColumns = (t): ColumnItemType[] => {
   return columnTypes.map((value) => {
     let res: ColumnItemType = {
       title: t(`orders.table.header.${value}`),
@@ -54,11 +54,12 @@ const generateColumns = (t: TFunction): ColumnItemType[] => {
 
 const OrdersTable:React.FC = () => {
   const {t} = useTranslation();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const ids = useSelector((state: AppStateType) => state.orders.ids);
   const loading = useSelector((state: AppStateType) => selectFetchingByKey(state, "onAddRow"));
 
   const handleAdd = useCallback(() => {
+    // @ts-ignore
     dispatch(onAddRow())
   }, [dispatch]);
 

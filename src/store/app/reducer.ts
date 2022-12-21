@@ -1,5 +1,5 @@
-import {AppState, ModalType, ModalTypes} from "types/app-types";
-import {AppActionsType} from "store/store";
+import {AppState, ModalType, ModalTypes} from "@Types/app-types";
+import {AppActionsType} from "@Store/store";
 
 import {appActionTypes} from "./actions";
 

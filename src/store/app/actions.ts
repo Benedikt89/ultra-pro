@@ -1,4 +1,4 @@
-import {ModalTypes} from "types/app-types";
+import {ModalTypes} from "@Types/app-types";
 
 export const appActionTypes: {
   SET_IS_FETCHING: 'app/SET_IS_FETCHING'

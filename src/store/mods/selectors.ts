@@ -1,7 +1,7 @@
 import {createSelector} from "reselect";
 
-import {AppStateType} from "store/store";
-import {Modification} from "types/mods-types";
+import {AppStateType} from "@Store/store";
+import {Modification} from "@Types/mods-types";
 
 export const selectModById = (state:AppStateType, id: string): Modification | null =>
   state.mods.data[id] ?? null;

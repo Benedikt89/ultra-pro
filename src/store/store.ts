@@ -1,5 +1,7 @@
-import {Action, applyMiddleware, combineReducers, createStore} from "redux";
-import thunkMiddleware, { ThunkDispatch } from "redux-thunk";
+import {AnyAction, combineReducers} from "redux";
+import thunkMiddleware, {ThunkDispatch} from "redux-thunk";
+import {useDispatch} from "react-redux";
+import {configureStore} from "@reduxjs/toolkit";
 
 import authReducer from "./auth/authReducer";
 import {AuthActions} from "./auth/actions";
@@ -17,26 +19,23 @@ const rootReducer = combineReducers({
     orders: ordersReducer
 });
 
+export type AppActionsType = AuthActions | AppActions | ModsActions | OrdersActions;
 
-const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
+const store = configureStore({
+    reducer: rootReducer,
+    middleware: [thunkMiddleware]
+})
+
 
 export type GetStateType = typeof store.getState;
 export type AppStateType = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
-export type AppActionsType = AuthActions | AppActions | ModsActions | OrdersActions;
+export type StoreType = typeof store;
 
-export type ThunkAction<
-  R, // Return type of the thunk function
-  S, // state type used by getState
-  E, // any "extra argument" injected into the thunk
-  A extends Action // known types of actions that can be dispatched
-  > = (dispatch: ThunkDispatch<S, E, A>, getState: () => S, extraArgument: E) => R
 
-export type AppThunk<ReturnType = void> = ThunkAction<
-  ReturnType,
-  AppStateType,
-  unknown,
-  AppActionsType
-  >
+type AsyncAction = (dispatch: (action: AnyAction) => any) => void;
+type Dispatcher = (action: AsyncAction | AnyAction) => void
+
+export const useAppDispatch: () => AppDispatch & ThunkDispatch<any, any, any> = useDispatch
 
 export default store;

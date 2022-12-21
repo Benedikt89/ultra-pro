@@ -1,7 +1,7 @@
 import React, {useCallback, useEffect, useState} from "react";
 import {Select, Tooltip} from 'antd';
 
-import {Option} from "types/orders-types";
+import {Option} from "@Types/orders-types";
 
 const getOption = (title: string, i: number = 0): Option => ({
   id: Math.random() + "opt_id",
@@ -48,7 +48,9 @@ const FetchDropdown: React.FC<Props> = ({
   const [value, setValue] = useState<Option | null>(initialValue ?? null);
   const [options, setOptions] = useState<Option[]>(initialOptions ?? []);
 
-  const handleChange = useCallback((value: string, option = {}) => {
+  const handleChange = useCallback((value: string, option = {
+    children: undefined
+  }) => {
     setValue({ id: value, title: option.children ?? '' });
     onChange && onChange({ id: value, title: option.children ?? '' }, options);
   }, [onChange, options]);
@@ -86,7 +88,9 @@ const FetchDropdown: React.FC<Props> = ({
           onChange={handleChange}
           onBlur={() => onBlur && onBlur(value)}
           loading={loading}
-          filterOption={(input, option) => {
+          filterOption={(input, option = {
+            children: undefined
+          }) => {
             const val: string = typeof option?.children === "string" ? option?.children : "";
             return val.toLowerCase().indexOf(input.toLowerCase()) >= 0
           }}

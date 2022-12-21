@@ -1,11 +1,10 @@
-import {AppStateType} from "store/store";
-import {AuthUserData, RolesType} from "types/auth-types";
+import {AppStateType} from "@Store/store";
+import {AuthUserData, RolesType} from "@Types/auth-types";
 
 export const selectIsAuth = (state:AppStateType): boolean =>
-    state.auth.isAuth && !!state.auth.userData.Authorization;
+    state.auth.isAuth && !!state.auth.tokens.access;
 
-export const selectToken = (state:AppStateType): string =>
-    state.auth.userData.Authorization;
+export const selectToken = (state:AppStateType): string => state.auth.tokens.access;
 
 export const selectUserData = (state:AppStateType): AuthUserData =>
     state.auth.userData;

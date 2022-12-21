@@ -1,13 +1,14 @@
 import React from 'react';
 import classNames from "classnames";
-import {Input, Tooltip, Select} from "antd";
-import {useField} from "formik";
+import {Input, Select, Form} from "antd";
+import {Rule} from "rc-field-form/lib/interface";
 
 import style from './FormControl.module.css';
 
 interface Props {
   type?: string;
-  name?: string;
+  name: string;
+  rules?: Rule[];
   label?: string;
   placeholder?: string;
   validate?: (value: string) => string | undefined;
@@ -17,38 +18,31 @@ interface Props {
   options?: {value: string; disabled?: boolean; title?: string;}[]
 }
 
-export const FieldWrapper: React.FC<Props> = ({validate, ...props}: Props) => {
-  const [field, {touched, error}] = useField(props.name ?? "");
+export const FieldWrapper: React.FC<Props> = ({validate, wrapperclassname, ...props}: Props) => {
 
   let cx = classNames.bind(style);
-  let classForField = cx(style.fieldWrapper, {
-    success: touched && !error,
-    error: error && touched,
-  });
+  let classForField = cx(wrapperclassname);
 
   return (
-    <div className={props.wrapperclassname ? props.wrapperclassname : ''}>
-      <label className={style.title}>{props.label}</label>
-      <Tooltip visible={touched && !!error}
-               title={error ? error : ''}
-               color={error ? 'red' : 'orange'}
-      >
-        <div className={classForField}>
-          {props.type === 'password'
-            ? <Input.Password {...field} {...props}/>
-            : props.type === 'select'
-              ? <Select {...field} {...props} style={{width: 360}}>
-                {props?.options?.map((opt: any) => (
-                  <Select.Option value={opt.value} key={opt.value} disabled={opt.disabled}>
-                    {opt.title ?? opt.value}
-                  </Select.Option>
-                ))}
-              </Select>
-              : <Input {...field} {...props} />
-          }
-        </div>
-      </Tooltip>
-    </div>
+    <Form.Item
+      name={props.name}
+      rules={props.rules}
+      label={props.label}
+      className={classForField}
+    >
+      {props.type === 'password'
+        ? <Input.Password {...props} />
+        : props.type === 'select'
+          ? <Select {...props} style={{width: 360}}>
+            {props?.options?.map((opt: any) => (
+              <Select.Option value={opt.value} key={opt.value} disabled={opt.disabled}>
+                {opt.title ?? opt.value}
+              </Select.Option>
+            ))}
+          </Select>
+          : <Input {...props} />
+      }
+    </Form.Item>
   )
 };
 

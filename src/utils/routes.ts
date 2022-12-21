@@ -1,5 +1,5 @@
-import {RolesType} from "../types/auth-types";
-import {hasOwnProperty} from "../types/typeHelpers";
+import {RolesType} from "@Types/auth-types";
+import {hasOwnProperty} from "@Types/typeHelpers";
 
 export interface RouteType {
   path: string,

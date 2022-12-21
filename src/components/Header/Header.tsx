@@ -1,19 +1,20 @@
 import * as React from "react";
 import {useCallback} from "react";
-import {Button, PageHeader} from "antd";
+import {Button} from "antd";
 import {Link} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 import {useDispatch} from "react-redux";
+import {useLocation} from "react-router";
 
-import {logOut} from "store/auth/actions";
-import logo from "assets/images/logo.png";
-import headphones from "assets/images/icons/headphones.svg";
-import circul from "assets/images/icons/circul.svg";
-import info from "assets/images/icons/info.svg";
-import exit from "assets/images/icons/exit.svg";
+import {logOut} from "@Store/auth/actions";
+
+import logo from "@Assets/images/logo.png";
+import headphones from "@Assets/images/icons/headphones.svg";
+import circul from "@Assets/images/icons/circul.svg";
+import info from "@Assets/images/icons/info.svg";
+import exit from "@Assets/images/icons/exit.svg";
 
 import './Header.less';
-import {useLocation} from "react-router";
 
 interface Props {
 }
@@ -47,18 +48,19 @@ const Header: React.FC<Props> = ({}) => {
   }
 
   return (
-    <PageHeader
-      className="site-page-header-responsive"
-      title={<>
+    <div className="site-page-header-responsive">
+      <div className="site-page-header-logo-section">
         <Link to='/orders'>
-          <img src={logo} alt="logo" className="header-logo"/>
+          <img src={logo} alt="logo" className="site-header-logo"/>
         </Link>
         <Button className="header-icon-button" icon={<img src={headphones} alt="logo"/>} disabled />
         <Button className="header-icon-button" icon={<img src={circul} alt="logo"/>} disabled/>
         <Button className="header-icon-button" icon={<img src={info} alt="logo"/>} disabled />
-      </>}
-      extra={extra}
-    />
+      </div>
+      <div className="site-page-header-extra-section">
+        {extra.map(component => component)}
+      </div>
+    </div>
   )
 };
 

@@ -4,14 +4,14 @@ import {Button, Input, Select} from "antd";
 import {useDispatch, useSelector} from "react-redux";
 import {FileAddOutlined} from "@ant-design/icons";
 
-import {setModal} from "store/app/actions";
-import DetailPicker from "components/forms/DetailPicker/DetailPicker";
-import FetchDropdown from "components/forms/FetchDropdown";
-import {selectEditingMod} from "store/mods/selectors";
-import {ModificationData, ModificationCoordsKeys} from "types/mods-types";
-import {modDefaults} from "store/mods/reducer";
-import {deleteModification, saveModification} from "store/mods/actions";
-import {Option} from "types/orders-types";
+import {setModal} from "@Store/app/actions";
+import DetailPicker from "@Components/forms/DetailPicker/DetailPicker";
+import FetchDropdown from "@Components/forms/FetchDropdown";
+import {selectEditingMod} from "@Store/mods/selectors";
+import {ModificationData, ModificationCoordsKeys} from "@Types/mods-types";
+import {modDefaults} from "@Store/mods/reducer";
+import {deleteModification, saveModification} from "@Store/mods/actions";
+import {Option} from "@Types/orders-types";
 
 import "./ModificationsModal.less";
 

@@ -1,5 +1,5 @@
-import {ModificationData, ModificationsState} from "types/mods-types";
-import {AppActionsType} from "store/store";
+import {ModificationData, ModificationsState} from "@Types/mods-types";
+import {AppActionsType} from "@Store/store";
 
 import {modsActionTypes} from "./actions";
 

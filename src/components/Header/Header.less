@@ -1,25 +1,39 @@
 @import "../../index";
 
 .site-page-header-responsive {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
     border-bottom: 1px solid @primary-color;
+    padding: 24px 40px;
 }
+
+.site-page-header-logo-section {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    .site-header-logo {
+        height: 35px;
+        margin-right: 20px;
+    }
+    .ant-btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+.site-page-header-extra-section {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+}
+
 .ant-page-header-heading-extra {
     display: flex;
     align-items: center;
-}
-
-.logout-button {
-    display: flex;
-    align-items: center;
-}
-.logout-button > span {
-    margin-left: 5px;
-}
-
-.header-logo {
-    width: 200px;
-    margin-right: 56px;
-}
-.header-icon-button {
-    margin: 0 16px;
 }

@@ -1,12 +1,12 @@
 import {batch} from 'react-redux';
 import {message, Modal} from "antd";
 
-import {AppDispatch, GetStateType} from "store/store";
-import {selectErrorByKey, selectFetchingByKey} from "store/app/selectors";
-import {_setError, _setFetching} from "store/app/actions";
-import {selectToken} from "store/auth/selectors";
-import {logOut} from "store/auth/actions";
-import {hasOwnProperty} from "types/typeHelpers";
+import {AppDispatch, GetStateType} from "@Store/store";
+import {selectErrorByKey, selectFetchingByKey} from "@Store/app/selectors";
+import {_setError, _setFetching} from "@Store/app/actions";
+import {selectToken} from "@Store/auth/selectors";
+import {logOut} from "@Store/auth/actions";
+import {hasOwnProperty} from "@Types/typeHelpers";
 
 import {errorMessages} from './errorMessages';
 import {APIerrorLogger} from "./errorLogger";
@@ -14,20 +14,20 @@ import {APIerrorLogger} from "./errorLogger";
 export function fetchHandler(key: string, callback: (
   dispatch: AppDispatch,
   getState: GetStateType,
-  auth: string) => Promise<boolean | undefined>) {
+  ) => Promise<boolean | undefined | void>) {
   return async function (dispatch: AppDispatch, getState: GetStateType) {
     try {
       const loading = selectFetchingByKey(getState(), key);
       const error = selectErrorByKey(getState(), key);
       const auth = selectToken(getState());
-      if (!loading && (!!auth || key === 'loginUser')) {
+      if (!loading && (!!auth || key === 'loginUser' || key === 'checkAuth')) {
         batch(() => {
           if (error) {
             dispatch(_setError(key, null));
           }
           dispatch(_setFetching(key, true));
         });
-        const response = await callback(dispatch, getState, auth);
+        const response = await callback(dispatch, getState);
         batch(() => {
           dispatch(_setFetching(key, false));
           if (!response) {

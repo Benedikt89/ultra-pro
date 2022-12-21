@@ -4,4 +4,4 @@ function useEffectOnce(effect: EffectCallback) {
   useEffect(effect, [])
 }
 
-export default useEffectOnce
+export default useEffectOnce;

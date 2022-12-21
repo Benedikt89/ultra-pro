@@ -1,13 +1,11 @@
 import {ThunkDispatch} from "redux-thunk";
 
-import {AuthUserData, LoginData, ProfileFieldType} from "types/auth-types";
-import {AppActionsType, GetStateType} from "store/store";
-import {fetchHandler} from "utils/fetchWrapper";
+import {AuthLoginResponse, AuthUserData, LoginData, RecoverPasswordData} from "@Types/auth-types";
+import {AppActionsType, GetStateType} from "@Store/store";
+import {fetchHandler} from "@Utils/fetchWrapper";
 
 import {authAPI} from "./api";
-
-export const localStorageKey = process.env.REACT_APP_LS_TOKEN || 'REACT_APP_LS_TOKEN';
-export const localStorageRoleKey = process.env.REACT_APP_USER_ROLE || 'ultra-pro-user-role';
+import {localStorageRoleKey, localStorageTokenKey} from "@Utils/api/api";
 
 export const LOGOUT_USER_SUCCESS = 'app/auth/LOGOUT_USER_SUCCESS';
 export const SET_USER_DATA = 'app/auth/SET_USER_DATA';
@@ -17,8 +15,7 @@ export type AuthActions = UserSessionDataAC | LogoutUserSuccessAC;
 //interfaces
 interface UserSessionDataAC {
   type: typeof SET_USER_DATA,
-  payload: AuthUserData
-  userFields?: ProfileFieldType[]
+  payload: AuthUserData & AuthLoginResponse
 }
 
 interface LogoutUserSuccessAC {
@@ -27,30 +24,26 @@ interface LogoutUserSuccessAC {
 
 
 //ACTIONS CREATORS
-export const _setAuthUserData = (payload: AuthUserData, userFields?: ProfileFieldType[]): UserSessionDataAC =>
-  ({type: SET_USER_DATA, payload, userFields});
+export const _setAuthUserData = (payload: AuthUserData & AuthLoginResponse): UserSessionDataAC =>
+  ({type: SET_USER_DATA, payload});
 
 export const logOut = (): LogoutUserSuccessAC => {
-  localStorage.removeItem(localStorageKey);
+  localStorage.removeItem(localStorageTokenKey);
   localStorage.removeItem(localStorageRoleKey);
   return {type: LOGOUT_USER_SUCCESS};
 };
 
 
 //EXTERNAL ACTIONS
-export const loginUserThunk = (data: LoginData, commonAuth?: AuthUserData) =>
+export const loginUserThunk = (data: LoginData) =>
   fetchHandler(
     'loginUser',
     async (dispatch: ThunkDispatch<{}, {}, AppActionsType>) => {
-      let auth: AuthUserData | null = commonAuth || null;
-      if (!commonAuth) {
-        auth = await authAPI.loginUser(data);
-        localStorage.setItem(localStorageKey, JSON.stringify(auth));
-      }
+      let auth: AuthLoginResponse | null = await authAPI.loginUser(data);
       if (auth) {
         try {
-          let userData = await authAPI.getUser(auth.Authorization);
-          if (auth && userData) {
+          const userData = await authAPI.getUser();
+          if (auth && userData?.role !== "None") {
             localStorage.setItem(localStorageRoleKey, userData.role ?? "");
             dispatch(_setAuthUserData({...auth, ...userData}));
             return true;
@@ -63,40 +56,26 @@ export const loginUserThunk = (data: LoginData, commonAuth?: AuthUserData) =>
     }
   );
 
-export const getUserDataThunk = () =>
+export const checkAuth = () =>
   fetchHandler(
-    'getUserData',
-    async (dispatch: ThunkDispatch<{}, {}, AppActionsType>, getState: GetStateType, auth: string) => {
-      console.log('=======> getUserDataThunk');
-      const userData = getState().auth.userData;
-      if (userData) {
-        const res = await authAPI.getUserFields(auth);
-        dispatch(_setAuthUserData({...userData}, res));
-        return true
+    'checkAuth',
+    async (dispatch: ThunkDispatch<{}, {}, AppActionsType>) => {
+      const token = localStorage.getItem(localStorageTokenKey);
+      if (token) {
+        const userData = await authAPI.getUser(token);
+        if (userData?.role !== "None") {
+          dispatch(_setAuthUserData({tokens: {access: token}, ...userData}));
+          return true;
+        }
       }
     }
   );
 
-export const updateUserDataThunk = (data: ProfileFieldType[]) => fetchHandler(
-  'updateUserData',
-  async (dispatch: ThunkDispatch<{}, {}, AppActionsType>, getState: GetStateType, auth: string) => {
-    console.log('=======> updateUserDataThunk');
-    const userData = getState().auth.userData;
-    if (userData) {
-      const res = await authAPI.updateUserFields(auth, data);
-      if (res) {
-        dispatch(_setAuthUserData({...userData}, data));
-        return true
-      }
-    }
-  }
-);
-
-export const recoverPasswordThunk = (data: any) =>
+export const recoverPasswordThunk = (data: RecoverPasswordData) =>
   fetchHandler(
     'recoverPassword',
-    async (dispatch: ThunkDispatch<{}, {}, AppActionsType>, getState: GetStateType, auth: string) => {
-      let result = await authAPI.recoverPassword(auth, data);
+    async (dispatch: ThunkDispatch<{}, {}, AppActionsType>, getState: GetStateType) => {
+      let result = await authAPI.recoverPassword(data);
       if (result) {
         return true
       }

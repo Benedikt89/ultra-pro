@@ -1,23 +1,20 @@
 import React from "react";
-import {Alert, Button, Typography} from "antd";
+import {Alert, Button, Typography, Form} from "antd";
 import {useTranslation} from "react-i18next";
-import {Form as FormikForm, Formik} from "formik";
 
-import {FieldWrapper} from "components/forms/FormElements/FormsControls";
-import OrdersTable from "routes/orders/table/OrdersTable";
+import {FieldWrapper} from "@Components/forms/FormElements/FormsControls";
+import OrdersTable from "@Routes/orders/table/OrdersTable";
 
 import "./Orders.less";
 
 const OrdersPage: React.FC = () => {
   const {t} = useTranslation();
+  const [form] = Form.useForm();
 
   return (
     <div className="content-wrapper">
-      <Formik
-        initialValues={{}}
-        onSubmit={(values: any) => console.log(values)}
-      >
-        <FormikForm className="orders-header">
+      <div className="col w-full between">
+        <Form className="orders-header" form={form} onFinish={console.log}>
           <div className="orders-header-row">
             <div>
               <Button type="primary">
@@ -86,15 +83,15 @@ const OrdersPage: React.FC = () => {
               />
             </div>
           </div>
-        </FormikForm>
-      </Formik>
-      <div className="component-body">
-        <div className="mb-2">
-          <Typography.Title level={5} style={{margin: "0"}}>
-            {t("orders.table_title")}
-          </Typography.Title>
+        </Form>
+        <div className="component-body">
+          <div className="mb-2">
+            <Typography.Title level={5} style={{margin: "0"}}>
+              {t("orders.table_title")}
+            </Typography.Title>
+          </div>
+          <OrdersTable />
         </div>
-        <OrdersTable />
       </div>
       <div className="orders-footer">
         {["save_order", "save_options", "save_spec", "save_cnc", "save_materials"].map(key => (

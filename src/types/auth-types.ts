@@ -1,5 +1,5 @@
 export interface LoginData {
-    login: string,
+    username: string,
     password: string
 }
 
@@ -9,36 +9,33 @@ export interface EventObject {
 }
 
 export type EventType = 'AUTH_FETCHING' | 'AUTH_ERROR' | 'LOGIN_ERROR' | 'REGISTER_ERROR' | 'AUTH_SUCCESS'
-export type RolesType = 'ROLE_SUPER_ADMIN' | 'ROLE_ADMIN' | 'ROLE_OPERATOR' | 'ROLE_INSPECTOR'
+export type RolesType = 'ROLE_SUPER_ADMIN' | 'ROLE_ADMIN' | 'ROLE_OPERATOR' | 'ROLE_INSPECTOR' | "None"
 
+
+export interface AuthLoginResponse {
+    tokens: {
+        access: string;
+        refresh?: string;
+    }
+}
 
 export interface AuthUserData {
-    Authorization: string
-    Expiration: string
     login: string
     role: RolesType | null
     userId: number | string
 }
 
-export type ProfileFieldType = {
-    id: string
-    mandatory: boolean
-    name: string
-    regexp: null | string
-    templateId: number | string
-    value: string
-}
-
 export type AuthState = {
     [key in EventType]?: EventObject;
 } & {
-    userData: AuthUserData;
-    userFields: ProfileFieldType[],
+    userData: AuthUserData | null;
     isAuth: boolean;
-};
+} & AuthLoginResponse;
 
-export interface AuthToFrontUserData extends AuthUserData{
-    tokenDeathTime: number | null,
-    rememberMe: boolean | null,
+
+
+export interface RecoverPasswordData {
+    old_pass: string,
+    password: string,
+    repeat_password: string
 }
-

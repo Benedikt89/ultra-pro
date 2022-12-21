@@ -1,28 +1,27 @@
-interface OptionsObj {
-  url: string
-  auth: string
-  method?: 'POST' | 'DELETE' | 'PUT' | 'PATCH'
-  data?: object
-}
+import axios from "axios";
+import {localStorageTokenKey, baseUrl} from "@Utils/api/api";
 
-interface AxiosOptions {
-  url: string
-  headers: { Authorization: string, ['Content-Type']?: string }
-  method: 'POST' | 'DELETE' | 'PUT' | 'PATCH'
-  data?: string
-}
-
-export const createAxiosOptions = ({url, method, auth, data}: OptionsObj): AxiosOptions => {
-  let options: AxiosOptions = {
-    url: url,
-    method: method ? method : 'POST',
-    headers: {
-      Authorization: auth
+const instance = axios.create({
+  baseURL: baseUrl,
+  headers: {
+    common: {
+      ["Content-Type"]: "application/json"
     }
-  };
-  if (data) {
-    options.data = JSON.stringify(data);
-    options.headers['Content-Type'] = 'application/json';
   }
-  return options;
+});
+
+export const setAuthToken = token => {
+  if (token) {
+    localStorage.setItem(localStorageTokenKey, token);
+    instance.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  }
+  else {
+    delete instance.defaults.headers.common["Authorization"];
+  }
 };
+
+export const getInstance = () => {
+  return instance ?? axios.create({
+    baseURL: baseUrl
+  })
+}

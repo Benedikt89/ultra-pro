@@ -1,11 +1,11 @@
 import {ThunkDispatch} from "redux-thunk";
 
-import {fetchHandler} from "utils/fetchWrapper";
-import {columnFetchTypes, ColumnType, Option} from "types/orders-types";
-import {AppActionsType, GetStateType} from "store/store";
+import {fetchHandler} from "@Utils/fetchWrapper";
+import {columnFetchTypes, ColumnType, Option} from "@Types/orders-types";
+import {AppActionsType, AppDispatch, GetStateType} from "@Store/store";
 
 import {ordersAPI} from "./api";
-import {ModificationEntity} from "../../types/mods-types";
+import {ModificationEntity} from "@Types/mods-types";
 
 export const ordersTypes = {
   ADD_ROW: 'orders/ADD_ROW',
@@ -85,7 +85,7 @@ export const onAddRow = () =>
   );
 
 // add row and request for options
-export const onDuplicateRow = (id: string) =>
+export const onDuplicateRow = (id: string): (dispatch: AppDispatch, getState: GetStateType) => Promise<void> =>
   fetchHandler(
     'onDuplicateRow',
     async (dispatch: ThunkDispatch<{}, {}, AppActionsType>, getState: GetStateType) => {

@@ -1,6 +1,6 @@
-import {RolesType} from "../types/auth-types";
+import {RolesType} from "@Types/auth-types";
 import {getPermits} from "./routes";
-import {getSVGByKey} from "../assets/imageGetter";
+import {getSVGByKey} from "@Assets/imageGetter";
 
 export interface I_navigationItem {
   title: string
