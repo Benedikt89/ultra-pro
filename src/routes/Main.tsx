@@ -43,7 +43,7 @@ const Main: React.FC = () => {
     if (!!isToken) {
       dispatch(checkAuth()).finally(() => setRequested("done"));
     }
-    setRequested(isToken ? "requested" : "not");
+    setRequested(isToken ? "requested" : "done");
   })
 
   useEffect(() => {
