@@ -1,11 +1,11 @@
 import React, {useCallback, useEffect, useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
 
 import DropdownSelect from "@Components/forms/DropdownSelect";
-import {AppStateType} from "@Store/store";
+import {AppStateType, useAppDispatch} from "@Store/store";
 import {selectRowCell} from "@Store/orders/selectors";
-import {ColumnType} from "@Types/orders-types";
+import {ColumnType, numberCells} from "@Types/orders-types";
 import {onOptionSelect} from "@Store/orders/actions";
 import {selectFetchingByKey} from "@Store/app/selectors";
 import {Input} from "antd";
@@ -18,7 +18,6 @@ interface EditableCellProps {
   i: number;
 }
 
-const numberCells = ["width", "quantity", "height", "thick"];
 
 const EditableCell: React.FC<EditableCellProps> = ({
                                                      children,
@@ -29,7 +28,7 @@ const EditableCell: React.FC<EditableCellProps> = ({
                                                      ...restProps
                                                    }) => {
   const {t} = useTranslation();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const [editing, setEditing] = useState(false);
   const cellData = useSelector((state: AppStateType) => selectRowCell(state, record_id, _columnType));
   const loading = useSelector((state: AppStateType) => selectFetchingByKey(state, 'onOptionSelect' + record_id));
@@ -48,7 +47,6 @@ const EditableCell: React.FC<EditableCellProps> = ({
   const onChange = useCallback((value: any) => {
     const option = cellData?.options.find(opt => opt.id === value);
     if (option) {
-      // @ts-ignore
       dispatch(onOptionSelect(record_id, option, _columnType))
     }
   }, [record_id, _columnType, cellData]);

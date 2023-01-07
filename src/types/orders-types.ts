@@ -3,9 +3,18 @@ import {ModificationEntity} from "./mods-types";
 export const columnFetchTypes = ['rollName', 'model', 'frontTexture', 'paint', 'backTexture', 'color', 'areaFacade'];
 
 export const columnTypes = [
-  'index', 'type', 'height', 'width', 'quantity', 'thick', 'rollName', 'model', 'frontTexture', 'paint',
+  'index', 'series', 'product_type', 'height', 'width', 'quantity', 'thick', 'rollName', 'model', 'frontTexture', 'paint',
   'backTexture', 'color', 'areaFacade'
 ] as const;
+
+export function isColumnType (keyInput: string): keyInput is ColumnType {
+  return  [
+    'index', 'series', 'product_type', 'height', 'width', 'quantity', 'thick', 'rollName', 'model', 'frontTexture', 'paint',
+    'backTexture', 'color', 'areaFacade'
+  ].includes(keyInput);
+}
+
+export const numberCells = ["width", "quantity", "height", "thick"] as ColumnType[];
 
 export type ColumnType = typeof columnTypes[number];
 
@@ -14,6 +23,7 @@ export type DefaultRowValues = {
   _isEditing?: boolean
   loading?: boolean
   modifications: ModificationEntity
+  fields: {[key: string]: string}
 }
 
 export type Option = {id: string, title: string}
@@ -31,7 +41,15 @@ export type DataRow = DefaultRowValues & {
 
 export type PartialDataRow = Partial<DataRow> & { id: string };
 
+export interface Order {
+  complete: boolean
+  created_at: string
+  id: string
+}
+
 export type OrdersState = {
+  readonly orders: Order[]
+  readonly currentOrder: Order | null
   readonly ids: string[]
   readonly rows: {
     [key: string]: DataRow

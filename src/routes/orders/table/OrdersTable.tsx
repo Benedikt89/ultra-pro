@@ -3,13 +3,15 @@ import {Button, Table} from "antd";
 import {useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
 
-import {ColumnType, columnTypes} from "@Types/orders-types";
+import {ColumnType, columnTypes, numberCells} from "@Types/orders-types";
 import {AppStateType, useAppDispatch} from "@Store/store";
 import {onAddRow} from "@Store/orders/actions";
 import {selectFetchingByKey} from "@Store/app/selectors";
+import {selectAvailableColumns} from "@Store/orders/selectors";
 
 import EditableCell from "./EditableCell";
 import OperationsCell from "./OperationsCell";
+import "../Orders.less";
 
 type ColumnItemType = {
   _contentType?: 'text' | 'number' | 'operation' | 'select';
@@ -31,15 +33,15 @@ type ColumnItemType = {
   }
 };
 
-const generateColumns = (t): ColumnItemType[] => {
-  return columnTypes.map((value) => {
+const generateColumns = (arr, t): ColumnItemType[] => {
+  return arr.map((value) => {
     let res: ColumnItemType = {
       title: t(`orders.table.header.${value}`),
       _columnType: value as ColumnType,
       dataIndex: value as ColumnType,
       editable: value !== 'index',
-      width: value === 'index' ? 50 : 200,
-      _contentType: value === "width" || value === "quantity" || value === "height" ? "number" : "select",
+      width: value === 'index' ? 50 : numberCells.includes(value) ? 100 : 200,
+      _contentType: numberCells.includes(value) ? "number" : "select",
       onCell: (record: {id: string, key: string, i: number}) => ({
         record_id: record.id,
         dataIndex: value as ColumnType,
@@ -56,16 +58,16 @@ const OrdersTable:React.FC = () => {
   const {t} = useTranslation();
   const dispatch = useAppDispatch();
   const ids = useSelector((state: AppStateType) => state.orders.ids);
+  const availableColumns = useSelector((state: AppStateType) => selectAvailableColumns(state));
   const loading = useSelector((state: AppStateType) => selectFetchingByKey(state, "onAddRow"));
 
   const handleAdd = useCallback(() => {
-    // @ts-ignore
     dispatch(onAddRow())
   }, [dispatch]);
 
   const columns: ColumnItemType[] = useMemo(() => {
     return [
-      ...generateColumns(t),
+      ...generateColumns(availableColumns, t),
       {
         title: t('orders.table.header.operation'),
         dataIndex: 'operation',
@@ -78,7 +80,7 @@ const OrdersTable:React.FC = () => {
         ),
       },
     ];
-  }, [t]);
+  }, [availableColumns, t]);
 
   const components = {
     body: {
@@ -87,9 +89,10 @@ const OrdersTable:React.FC = () => {
   };
 
   return (
-    <div className="col between w-full h-full">
+    <div className="orders-table-wrapper">
       <Table
-        className={!ids.length ? "mb-2" : undefined}
+        className={"mb-3"}
+        pagination={false}
         components={components}
         rowClassName={() => 'editable-row'}
         bordered

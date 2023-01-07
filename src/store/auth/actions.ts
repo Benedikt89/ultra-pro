@@ -6,6 +6,7 @@ import {fetchHandler} from "@Utils/fetchWrapper";
 
 import {authAPI} from "./api";
 import {localStorageRoleKey, localStorageTokenKey} from "@Utils/api/api";
+import {setAuthToken} from "@Utils/axios-options";
 
 export const LOGOUT_USER_SUCCESS = 'app/auth/LOGOUT_USER_SUCCESS';
 export const SET_USER_DATA = 'app/auth/SET_USER_DATA';
@@ -30,6 +31,7 @@ export const _setAuthUserData = (payload: AuthUserData & AuthLoginResponse): Use
 export const logOut = (): LogoutUserSuccessAC => {
   localStorage.removeItem(localStorageTokenKey);
   localStorage.removeItem(localStorageRoleKey);
+  setAuthToken("");
   return {type: LOGOUT_USER_SUCCESS};
 };
 

@@ -10,6 +10,7 @@ interface Props {
   name: string;
   rules?: Rule[];
   label?: string;
+  disabled?: boolean;
   placeholder?: string;
   validate?: (value: string) => string | undefined;
   prefix?: React.ReactNode;
@@ -28,6 +29,7 @@ export const FieldWrapper: React.FC<Props> = ({validate, wrapperclassname, ...pr
       name={props.name}
       rules={props.rules}
       label={props.label}
+      fieldId={props.name}
       className={classForField}
     >
       {props.type === 'password'

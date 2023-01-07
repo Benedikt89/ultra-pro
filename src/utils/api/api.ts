@@ -1,19 +1,25 @@
 
-export const apiEndpoints = (method: string = "") => {
+export const apiEndpoints = (id: string = "") => {
 
-  const getApiEndpoints = () =>  ({
+  return {
     auth: {
-      me: `/users/me/`,
       login: `/auth/login/`,
-      changePassword: `/queue-config/profile/change/password`,
       readProfile: `/auth/login/`,
+      verifyToken: `/auth/jwt/verify/`,
+      refreshToken: `/auth/jwt/refresh/`,
+      changePassword: `/queue-config/profile/change/password`,
       readFieldList: `/queue-config/profile/read`,
     },
-  })
-  return getApiEndpoints();
+    orders: {
+      getOrders: `/constructor/order/list/`,
+      orderId: `/constructor/order/${id}/`,
+      order: `/constructor/order/`,
+      fields: `/constructor/batch/fields/`,
+    }
+  };
 }
 
-export const baseUrl = "http://localhost:8000/api" || process.env.REACT_APP_BASE_URL;
+export const baseUrl = process.env.REACT_APP_BASE_URL || "http://localhost:8000/api";
 
 export const localStorageTokenKey = process.env.REACT_APP_LS_TOKEN || '_ultra-pro-token';
 

@@ -34,7 +34,8 @@
       "sure_delete": "Sure to delete?",
       "header": {
         "index": "№",
-        "type": "Тип деталі",
+        "product_type": "Тип деталі",
+        "series": "Серія",
         "height": "Висота",
         "operation": "Дії",
         "width": "Ширина",

@@ -4,16 +4,25 @@ import {AppActionsType} from "@Store/store";
 import {ordersTypes} from "./actions";
 
 const initialState: OrdersState = {
+  orders: [],
+  currentOrder: null,
   rows: {},
   ids: []
 };
 
 const ordersReducer = (state: OrdersState = initialState, action: AppActionsType): OrdersState => {
   switch (action.type) {
+    case ordersTypes.SET_ORDERS: {
+      return {
+        ...state,
+        orders: action.orders
+      };
+    }
     case ordersTypes.ADD_ROW: {
       const newOne: DataRow = {
         id: Math.random() + "row_id",
-        type: { options: action.options, selected: null },
+        series: { options: action.options, selected: null },
+        fields: {},
         modifications: {
           ids: [],
           data: {}
@@ -55,7 +64,7 @@ const ordersReducer = (state: OrdersState = initialState, action: AppActionsType
       };
     }
     case ordersTypes.ON_SELECT: {
-      const {row_id, value, columnType, options, nextType} = action;
+      const {row_id, value, columnType, options, nextType, fields} = action;
       let nextRow = state.rows[row_id]
       const typeIdx = columnTypes.indexOf(columnType);
 
@@ -67,7 +76,11 @@ const ordersReducer = (state: OrdersState = initialState, action: AppActionsType
           delete nextRow[key]
         }
       })
-      nextRow = {...nextRow, [columnType]: { ...nextRow[columnType], selected: value }};
+      nextRow = {
+        ...nextRow,
+        [columnType]: { ...nextRow[columnType], selected: value },
+        fields
+      };
       if (nextType) {
         nextRow = {...nextRow, [nextType]: { options, selected: null } }
       }

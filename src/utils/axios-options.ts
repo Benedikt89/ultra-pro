@@ -16,6 +16,7 @@ export const setAuthToken = token => {
     instance.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   }
   else {
+    localStorage.removeItem(localStorageTokenKey);
     delete instance.defaults.headers.common["Authorization"];
   }
 };
